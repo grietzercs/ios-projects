@@ -15,5 +15,7 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func MainButton(_ sender: UIButton) {
+    }
 }
 
