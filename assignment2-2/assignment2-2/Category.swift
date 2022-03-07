@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 struct Category {
-    let categoryName: String
+    let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
     let categoryImage: UIImage
     
     init(_ name: String, _ image: UIImage) {
         self.categoryName = name
         self.categoryImage = image
     }
+    
+    
 }
 
 //let categories: [Category] = [

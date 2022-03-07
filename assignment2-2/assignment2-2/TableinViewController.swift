@@ -11,7 +11,6 @@ class TableinViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var tableCellImage: UIImageView!
     
     let groceryItems: [String] = ["Tomatoes", "Bananas", "Gala", "Lettuce", "Broccoli"]
     
@@ -19,7 +18,7 @@ class TableinViewController: UIViewController {
     
     let movieItems: [String] = ["Shawshank", "Lord of the Rings", "Godfather", "Bladerunner 2049", "Interstellar"]
     
-    let gardenItems: [String] = ["Shovel", "Tomato Peeler", "Mower", "Garden Soil", "Fruit Tree"]
+    let gardenItems: [String] = ["Shovel", "Tomato Plant", "Mower", "Garden Soil", "Fruit Tree"]
     
     let electronicItems: [String] = ["Television", "Cell Phone", "Gaming Console", "Headphones", "Laptop"]
     
@@ -53,7 +52,16 @@ extension TableinViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+        
+        var cell = UITableViewCell()
+        //var image = UIImage(named: groceryImages[indexPath.row])
+        
+        if let listItem = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell {
+            
+            listItem.configure(with: groceryItems[indexPath.row], with: groceryImages[indexPath.row])
+            
+            cell = listItem
+        }
         
         //cell.textLabel?.text = groceryItems[indexPath.row]
         

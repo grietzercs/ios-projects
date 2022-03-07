@@ -196,7 +196,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kca-hB-cHw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439" y="82"/>
+            <point key="canvasLocation" x="1341" y="-767"/>
         </scene>
         <!--Tablein View Controller-->
         <scene sceneID="xdL-j7-fR0">
@@ -211,26 +211,38 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableViewCell" rowHeight="129" id="dPa-Cs-02G" customClass="TableViewCell" customModule="assignment2_2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="129"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableViewCell" rowHeight="109" id="dPa-Cs-02G" customClass="TableViewCell" customModule="assignment2_2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dPa-Cs-02G" id="qAx-Pc-jhO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="grocery-2-bananas" translatesAutoresizingMaskIntoConstraints="NO" id="B9t-qU-4JK">
-                                                    <rect key="frame" x="0.0" y="-11" width="147" height="151"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B9t-qU-4JK">
+                                                    <rect key="frame" x="0.0" y="11" width="121" height="87"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQe-WL-MlZ">
-                                                    <rect key="frame" x="155" y="0.0" width="108" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQe-WL-MlZ">
+                                                    <rect key="frame" x="129" y="0.0" width="137" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="IQe-WL-MlZ" secondAttribute="trailing" constant="128" id="2BN-K7-Ltg"/>
+                                                <constraint firstItem="IQe-WL-MlZ" firstAttribute="top" secondItem="qAx-Pc-jhO" secondAttribute="topMargin" constant="-11" id="P2e-NR-Gx8"/>
+                                                <constraint firstAttribute="bottom" secondItem="B9t-qU-4JK" secondAttribute="bottom" constant="11" id="TBm-C6-RRt"/>
+                                                <constraint firstItem="B9t-qU-4JK" firstAttribute="leading" secondItem="qAx-Pc-jhO" secondAttribute="leading" id="WIZ-qR-Sua"/>
+                                                <constraint firstAttribute="trailing" secondItem="B9t-qU-4JK" secondAttribute="trailing" constant="293" id="eoh-9I-wjY"/>
+                                                <constraint firstItem="B9t-qU-4JK" firstAttribute="top" secondItem="qAx-Pc-jhO" secondAttribute="top" constant="11" id="m6c-w9-3ci"/>
+                                                <constraint firstItem="IQe-WL-MlZ" firstAttribute="leading" secondItem="B9t-qU-4JK" secondAttribute="trailing" constant="8" id="qem-ey-PAG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="IQe-WL-MlZ" secondAttribute="bottom" constant="80" id="yw6-vI-r2W"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tableCellImage" destination="B9t-qU-4JK" id="Ja0-r7-CPx"/>
+                                            <outlet property="tableCellLabel" destination="IQe-WL-MlZ" id="ltR-D6-3a7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -245,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hOM-Ir-20R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2173.913043478261" y="81.696428571428569"/>
+            <point key="canvasLocation" x="1362.3188405797102" y="81.696428571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfr-oS-fZ2">
