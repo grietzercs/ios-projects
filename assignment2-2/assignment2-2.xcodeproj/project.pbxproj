@@ -19,6 +19,9 @@
 		34C99FA727D58E6E0093C716 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FA627D58E6E0093C716 /* CollectionViewController.swift */; };
 		34C99FA927D590190093C716 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FA827D590190093C716 /* CollectionViewCell.swift */; };
 		34C99FAD27D5C1610093C716 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FAC27D5C1610093C716 /* Category.swift */; };
+		34C99FAF27D5FDFA0093C716 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FAE27D5FDFA0093C716 /* TableViewController.swift */; };
+		34C99FB127D603950093C716 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FB027D603950093C716 /* TableViewCell.swift */; };
+		34C99FB927D651FA0093C716 /* TableinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FB827D651FA0093C716 /* TableinViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		34C99FA627D58E6E0093C716 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		34C99FA827D590190093C716 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		34C99FAC27D5C1610093C716 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		34C99FAE27D5FDFA0093C716 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		34C99FB027D603950093C716 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		34C99FB827D651FA0093C716 /* TableinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,9 @@
 				34C99FA627D58E6E0093C716 /* CollectionViewController.swift */,
 				34C99FA827D590190093C716 /* CollectionViewCell.swift */,
 				34C99FAC27D5C1610093C716 /* Category.swift */,
+				34C99FAE27D5FDFA0093C716 /* TableViewController.swift */,
+				34C99FB027D603950093C716 /* TableViewCell.swift */,
+				34C99FB827D651FA0093C716 /* TableinViewController.swift */,
 			);
 			path = "assignment2-2";
 			sourceTree = "<group>";
@@ -268,6 +277,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				34C99FA927D590190093C716 /* CollectionViewCell.swift in Sources */,
+				34C99FB127D603950093C716 /* TableViewCell.swift in Sources */,
+				34C99FB927D651FA0093C716 /* TableinViewController.swift in Sources */,
+				34C99FAF27D5FDFA0093C716 /* TableViewController.swift in Sources */,
 				34C99FA727D58E6E0093C716 /* CollectionViewController.swift in Sources */,
 				34C99F7427D58E020093C716 /* AppDelegate.swift in Sources */,
 				34C99F7E27D58E020093C716 /* assignment2_2.xcdatamodeld in Sources */,
