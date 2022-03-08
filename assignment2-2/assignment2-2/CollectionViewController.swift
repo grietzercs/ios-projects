@@ -21,6 +21,9 @@ class CollectionViewController: UICollectionViewController {
     
     var globalIndex: Int = 0
 
+    @IBOutlet weak var testNavBar: UINavigationItem!
+    //print(self.testNavBar.rightBarButtonItem?.title())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,7 +78,15 @@ class CollectionViewController: UICollectionViewController {
         
         print("Index: \(sender.tag)")
         
-        if (sender.tag < 2) {
+        if (sender.tag == 0) {
+            guard let destVC = mainStoryboard.instantiateViewController(withIdentifier: "RecentOrdersViewController") as? RecentOrdersViewController else {
+                print("Couldn't find the new controller")
+                return
+            }
+            navigationController?.pushViewController(destVC, animated: true)
+        }
+        
+        if (sender.tag == 1) {
             guard let destVC = mainStoryboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController else {
                 print("Couldn't find the new controller")
                 return

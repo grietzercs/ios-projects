@@ -25,10 +25,19 @@ class TableViewController: UITableViewController {
     
     let toyItems: [String] = ["Car", "Firetruck", "Doll", "Slinky", "Spinning Top"]
     
+    
+    @IBOutlet weak var categoryNavBar: UINavigationItem!
+    @IBOutlet weak var rightNavBarButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let rightButton: UIBarButtonItem = UIBarButtonItem(title: "testCart", style: UIBarButtonItem.Style.done, target: nil, action: nil)
+        self.categoryNavBar.rightBarButtonItem = rightButton
+        self.categoryNavBar.rightBarButtonItem?.tag = 1
     }
+    
+    
 
     // MARK: - Table view data source
     

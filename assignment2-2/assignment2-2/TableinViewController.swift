@@ -15,6 +15,9 @@ class TableinViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var navBar: UINavigationItem!
+    @IBOutlet weak var rightNavBarButton: UIButton!
+    
     let groceryItems: [String] = ["Tomatoes", "Bananas", "Gala", "Lettuce", "Broccoli"]
     
     let clothingItems: [String] = ["T-Shirt", "Jeans", "Shoes", "Pajamas", "Polo"]
@@ -44,7 +47,28 @@ class TableinViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //let rightButton: UIBarButtonItem = UIBarButtonItem(title: "testCart", style: UIBarButtonItem.Style.done, target: nil, action: nil)
+        //self.navBar.rightBarButtonItem = rightButton
+        //self.navBar.rightBarButtonItem?.tag = 1
     }
+    
+//    @IBAction func goToCart(sender: UIBarButtonItem) {
+//        
+//
+//
+//        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//
+//        print("buttonPressed")
+//
+//        if (sender.tag != 10) {
+//            guard let destVC = mainStoryboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController else {
+//                print("Couldn't find the new controller")
+//                return
+//            }
+//            navigationController?.pushViewController(destVC, animated: true)
+//        }
+//    }
     
 }
 

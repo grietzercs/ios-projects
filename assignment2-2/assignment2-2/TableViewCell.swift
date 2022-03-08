@@ -9,6 +9,11 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var addToCart: UIButton!
+    
+    @IBOutlet weak var cellImage: UIImageView!
+    
     let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
     
     struct Category {
@@ -22,15 +27,19 @@ class TableViewCell: UITableViewCell {
         var toyImages: [String] = ["car", "firetruck", "doll", "slinky", "spinning-top"]
     }
     
-    @IBOutlet weak var tableCellImage: UIImageView!
-    
     @IBOutlet weak var tableCellLabel: UILabel!
     
     func configure(with cellLabel: String, with image: String, with index: Int, with passedData: Int) {
         //let test = "Passed Tag: \(passedData)"
         
+        let category = Category()
+        
         self.tag = index
-        tableCellImage.image = UIImage(named: "grocery-2-bananas")
+        cellImage.image = UIImage(named: category.groceryImages[index])
         tableCellLabel.text = cellLabel
+    }
+    
+    @IBAction func addToCartTapped(_ sender: Any) {
+        self.addToCart.isHidden = true
     }
 }
