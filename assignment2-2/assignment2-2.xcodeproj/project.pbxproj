@@ -22,6 +22,7 @@
 		34C99FAF27D5FDFA0093C716 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FAE27D5FDFA0093C716 /* TableViewController.swift */; };
 		34C99FB127D603950093C716 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FB027D603950093C716 /* TableViewCell.swift */; };
 		34C99FB927D651FA0093C716 /* TableinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FB827D651FA0093C716 /* TableinViewController.swift */; };
+		34C99FBB27D6FEA30093C716 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FBA27D6FEA30093C716 /* CartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		34C99FAE27D5FDFA0093C716 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		34C99FB027D603950093C716 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		34C99FB827D651FA0093C716 /* TableinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableinViewController.swift; sourceTree = "<group>"; };
+		34C99FBA27D6FEA30093C716 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				34C99FAE27D5FDFA0093C716 /* TableViewController.swift */,
 				34C99FB027D603950093C716 /* TableViewCell.swift */,
 				34C99FB827D651FA0093C716 /* TableinViewController.swift */,
+				34C99FBA27D6FEA30093C716 /* CartViewController.swift */,
 			);
 			path = "assignment2-2";
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			files = (
 				34C99FA927D590190093C716 /* CollectionViewCell.swift in Sources */,
 				34C99FB127D603950093C716 /* TableViewCell.swift in Sources */,
+				34C99FBB27D6FEA30093C716 /* CartViewController.swift in Sources */,
 				34C99FB927D651FA0093C716 /* TableinViewController.swift in Sources */,
 				34C99FAF27D5FDFA0093C716 /* TableViewController.swift in Sources */,
 				34C99FA727D58E6E0093C716 /* CollectionViewController.swift in Sources */,

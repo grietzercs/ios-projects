@@ -5,20 +5,20 @@
 //  Created by Colden on 3/6/22.
 //
 
-import Foundation
-import UIKit
-
-struct Category {
-    let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
-    let categoryImage: UIImage
-    
-    init(_ name: String, _ image: UIImage) {
-        self.categoryName = name
-        self.categoryImage = image
-    }
-    
-    
-}
+//import Foundation
+//import UIKit
+//
+//struct Category {
+//    let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
+//    let categoryImage: UIImage
+//    
+//    init(_ name: String, _ image: UIImage) {
+//        self.categoryName = name
+//        self.categoryImage = image
+//    }
+//    
+//    
+//}
 
 //let categories: [Category] = [
 //    Category("Recent Orders", getImage("category-1-recent")),

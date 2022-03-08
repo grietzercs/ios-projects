@@ -7,10 +7,13 @@
 
 import UIKit
 
+//protocol CanReceive {
+//    func passDataBack(data: Int)
+//}
+
 class TableinViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     
     let groceryItems: [String] = ["Tomatoes", "Bananas", "Gala", "Lettuce", "Broccoli"]
     
@@ -28,14 +31,21 @@ class TableinViewController: UIViewController {
     
     let toyItems: [String] = ["Car", "Firetruck", "Doll", "Slinky", "Spinning Top"]
     
+    var passingTag = -1
+    
+    var name = ""
+    
+//    var delegate:CanReceive?
+//
+//    var data = ""
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-
     }
-
+    
 }
 
 extension TableinViewController: UITableViewDelegate {
@@ -53,12 +63,14 @@ extension TableinViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        print(self.passingTag)
+
         var cell = UITableViewCell()
         //var image = UIImage(named: groceryImages[indexPath.row])
         
         if let listItem = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell {
             
-            listItem.configure(with: groceryItems[indexPath.row], with: groceryImages[indexPath.row])
+            listItem.configure(with: groceryItems[indexPath.row], with: groceryItems[indexPath.row], with: indexPath.row, with: passingTag)
             
             cell = listItem
         }

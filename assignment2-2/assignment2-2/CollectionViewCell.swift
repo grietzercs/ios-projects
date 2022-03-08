@@ -15,19 +15,20 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var selectionButton: UIButton!
     
-    func configure(with categoryChoice: String, with image: UIImage) {
-        if (categoryChoice == "Cart") {
-            self.selectionButton.tag = 1
-        }
-        if (categoryChoice == "Recent Orders") {
-            self.selectionButton.tag = 2
-        }
-        else {
-            self.selectionButton.tag = 0
-        }
+    var labelText = ""
+    
+    func configure(with categoryChoice: String, with image: UIImage, with index: Int) {
+        self.tag = index
+        selectionButton.tag = index
         recentOrdersLabel.text = categoryChoice
         categoryImage.image = image
+        labelText = categoryChoice
     }
+    
+//    class func getLabel() -> String {
+//        let test = labelTex
+//        return test
+//    }
     
     
 }
