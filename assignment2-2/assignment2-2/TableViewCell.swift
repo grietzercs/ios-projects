@@ -5,14 +5,17 @@
 //  Created by Colden on 3/7/22.
 //
 
-import UIKit
+import UIKit; import SwiftUI; 
 
 class TableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var addToCart: UIButton!
     
+    @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
+    
+    var sendData = TableViewController()
     
     let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
     
@@ -33,13 +36,17 @@ class TableViewCell: UITableViewCell {
         //let test = "Passed Tag: \(passedData)"
         
         let category = Category()
-        
+        self.addToCart.tag = index
         self.tag = index
         cellImage.image = UIImage(named: category.groceryImages[index])
         tableCellLabel.text = cellLabel
     }
     
-    @IBAction func addToCartTapped(_ sender: Any) {
-        self.addToCart.isHidden = true
+    
+    @IBAction func addToCart(_ sender: Any) {
+        let vc = sendData.storyboard?.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController
+        vc?.cell = self
+        sendData.navigationController?.pushViewController(vc!, animated: true)
     }
+
 }

@@ -16,31 +16,40 @@ class TableinViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var navBar: UINavigationItem!
-    @IBOutlet weak var rightNavBarButton: UIButton!
     
     let groceryItems: [String] = ["Tomatoes", "Bananas", "Gala", "Lettuce", "Broccoli"]
+    let groceryImages: [String] = ["grocery-1-tomatoes", "grocery-2-bananas", "grocery-3-gala", "grocery-4-lettuce", "grocery-5-broccoli"]
     
     let clothingItems: [String] = ["T-Shirt", "Jeans", "Shoes", "Pajamas", "Polo"]
+    let clothingImages: [String] = ["t-shirt", "jeans", "shoes", "Pajamas", "Polo"]
     
     let movieItems: [String] = ["Shawshank", "Lord of the Rings", "Godfather", "Bladerunner 2049", "Interstellar"]
+    let movieImages: [String] = ["shawshank", "lord-of-the-rings", "godfather", "bladerunner", "interstellar"]
     
     let gardenItems: [String] = ["Shovel", "Tomato Plant", "Mower", "Garden Soil", "Fruit Tree"]
+    let gardenImages: [String] = ["garden-1-shovel", "garden-2-tomato", "garden-3-mower", "garden-4-garden-soil", "garden-5-fruit-tree"]
     
     let electronicItems: [String] = ["Television", "Cell Phone", "Gaming Console", "Headphones", "Laptop"]
+    let electronicImages: [String] = ["television", "cell-phone", "gaming-console", "headphones", "laptop"]
     
     let bookItems: [String] = ["Eragon", "Divergent", "The Hobbit", "A Tale of Two Cities", "The Da Vinci Code"]
+    let bookImages: [String] = ["eragon", "divergent", "the-hobbit", "a-tale-of-two-cities", "da-vinci"]
     
     let applianceItems: [String] = ["Washer", "Dryer", "Dishwasher", "Oven", "Microwave"]
+    let applianceImages: [String] = ["washer", "dryer", "dishwasher", "oven", "microwave"]
     
     let toyItems: [String] = ["Car", "Firetruck", "Doll", "Slinky", "Spinning Top"]
+    let toyImages: [String] = ["car", "firetruck", "doll", "slinky", "spinning-top"]
     
     var passingTag = -1
     
     var name = ""
     
-//    var delegate:CanReceive?
-//
-//    var data = ""
+    struct cellData {
+        
+        var image = UIImage(named: "grocery-2-bananas")
+        var cellLabel = UILabel()
+    }
     
     override func viewDidLoad() {
         
@@ -48,15 +57,10 @@ class TableinViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //let rightButton: UIBarButtonItem = UIBarButtonItem(title: "testCart", style: UIBarButtonItem.Style.done, target: nil, action: nil)
-        //self.navBar.rightBarButtonItem = rightButton
-        //self.navBar.rightBarButtonItem?.tag = 1
     }
     
 //    @IBAction func goToCart(sender: UIBarButtonItem) {
-//        
-//
-//
+
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 //
 //        print("buttonPressed")
@@ -69,6 +73,7 @@ class TableinViewController: UIViewController {
 //            navigationController?.pushViewController(destVC, animated: true)
 //        }
 //    }
+    
     
 }
 
@@ -99,9 +104,10 @@ extension TableinViewController: UITableViewDataSource {
             cell = listItem
         }
         
-        //cell.textLabel?.text = groceryItems[indexPath.row]
-        
-        //tableCellImage.image = UIImage(named: "grocery-2-bananas.png")!
+        if let cell = TableViewCell.dequeueReusableCell(withIdentifier: "CartViewCell", for: indexPath) as? CartViewCell {
+            cell.tableCellLabel.text = groceryItems[indexPath.row]
+            cell.cellImage.image = UIImage(named: groceryImages[indexPath.row])
+        }
         
         return cell
     }

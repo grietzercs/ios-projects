@@ -24,6 +24,7 @@
 		34C99FB927D651FA0093C716 /* TableinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FB827D651FA0093C716 /* TableinViewController.swift */; };
 		34C99FBB27D6FEA30093C716 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FBA27D6FEA30093C716 /* CartViewController.swift */; };
 		34C99FBD27D701E50093C716 /* RecentOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C99FBC27D701E50093C716 /* RecentOrdersViewController.swift */; };
+		34FBC9C927D7A70F004E3FE2 /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FBC9C827D7A70F004E3FE2 /* CartViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		34C99FB827D651FA0093C716 /* TableinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableinViewController.swift; sourceTree = "<group>"; };
 		34C99FBA27D6FEA30093C716 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		34C99FBC27D701E50093C716 /* RecentOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentOrdersViewController.swift; sourceTree = "<group>"; };
+		34FBC9C827D7A70F004E3FE2 /* CartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				34C99FB827D651FA0093C716 /* TableinViewController.swift */,
 				34C99FBA27D6FEA30093C716 /* CartViewController.swift */,
 				34C99FBC27D701E50093C716 /* RecentOrdersViewController.swift */,
+				34FBC9C827D7A70F004E3FE2 /* CartViewCell.swift */,
 			);
 			path = "assignment2-2";
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				34C99F7427D58E020093C716 /* AppDelegate.swift in Sources */,
 				34C99F7E27D58E020093C716 /* assignment2_2.xcdatamodeld in Sources */,
 				34C99F7627D58E020093C716 /* SceneDelegate.swift in Sources */,
+				34FBC9C927D7A70F004E3FE2 /* CartViewCell.swift in Sources */,
 				34C99FAD27D5C1610093C716 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

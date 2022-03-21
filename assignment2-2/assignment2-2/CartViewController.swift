@@ -10,7 +10,11 @@ import UIKit
 
 class CartViewController: UIViewController {
     
+    var cell = TableViewCell()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
+    
 }

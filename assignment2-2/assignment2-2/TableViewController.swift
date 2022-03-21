@@ -25,7 +25,6 @@ class TableViewController: UITableViewController {
     
     let toyItems: [String] = ["Car", "Firetruck", "Doll", "Slinky", "Spinning Top"]
     
-    
     @IBOutlet weak var categoryNavBar: UINavigationItem!
     @IBOutlet weak var rightNavBarButton: UIButton!
     
@@ -36,8 +35,7 @@ class TableViewController: UITableViewController {
         self.categoryNavBar.rightBarButtonItem = rightButton
         self.categoryNavBar.rightBarButtonItem?.tag = 1
     }
-    
-    
+
 
     // MARK: - Table view data source
     
@@ -53,5 +51,7 @@ class TableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    
+    
 
 }
