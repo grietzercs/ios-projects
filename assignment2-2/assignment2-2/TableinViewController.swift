@@ -13,6 +13,7 @@ import UIKit
 
 class TableinViewController: UIViewController {
 
+    //this is a test for source control from xcode
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var navBar: UINavigationItem!
