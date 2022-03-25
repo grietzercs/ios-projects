@@ -19,26 +19,41 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sf7-5c-R3S">
                                 <rect key="frame" x="115" y="164" width="155" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Memory Game"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Memory Game">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="memoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6R0-sR-p93"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xv-B5-lbK">
-                                <rect key="frame" x="815" y="164" width="142" height="35"/>
+                                <rect key="frame" x="815" y="164" width="142" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Pop Balloons"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Pop Balloons">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="balloonsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Jj-GK-nhT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfk-mQ-9oR">
                                 <rect key="frame" x="475" y="164" width="155" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Sorting Game"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sorting Game">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="sortingPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ev-r6-p2o"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVg-6y-igs">
                                 <rect key="frame" x="120" y="367" width="149" height="35"/>
@@ -47,6 +62,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Easy"/>
+                                <connections>
+                                    <action selector="easyPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aIH-Sn-be9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYT-wi-SB6">
                                 <rect key="frame" x="820" y="367" width="142" height="35"/>
@@ -55,20 +73,19 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Hard"/>
+                                <connections>
+                                    <action selector="hardPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GtT-1U-VGD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ey2-kD-5lp">
                                 <rect key="frame" x="491" y="588" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="play"/>
+                                <connections>
+                                    <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ck2-Wp-e0v"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iw9-Ui-HOt">
-                                <rect key="frame" x="51" y="518" width="112" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-Qg-BEr">
                                 <rect key="frame" x="475" y="367" width="132" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -76,11 +93,39 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Medium"/>
+                                <connections>
+                                    <action selector="mediumPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aFD-s3-isv"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7K-ax-sBp">
+                                <rect key="frame" x="115" y="538" width="359" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Difficulty:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6j-hU-CuU">
+                                <rect key="frame" x="115" y="586" width="359" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="balloonsButton" destination="3xv-B5-lbK" id="clm-Mh-yt5"/>
+                        <outlet property="diffLabel" destination="R6j-hU-CuU" id="MA5-rG-UhE"/>
+                        <outlet property="easyButton" destination="nVg-6y-igs" id="RAn-ql-Tcq"/>
+                        <outlet property="gameLabel" destination="a7K-ax-sBp" id="xvX-im-3u8"/>
+                        <outlet property="hardButton" destination="IYT-wi-SB6" id="HfG-oc-j0l"/>
+                        <outlet property="mediumButton" destination="uf7-Qg-BEr" id="tP8-bj-WgJ"/>
+                        <outlet property="memoryButton" destination="sf7-5c-R3S" id="Zxf-Dp-for"/>
+                        <outlet property="playButton" destination="ey2-kD-5lp" id="ecb-24-vH8"/>
+                        <outlet property="sortingButton" destination="Vfk-mQ-9oR" id="wdd-ch-7rP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,9 +139,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
