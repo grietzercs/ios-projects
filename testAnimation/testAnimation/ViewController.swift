@@ -30,13 +30,14 @@ class ViewController: UIViewController {
     
     var xCoords: [Int] = []
     var tempX = 0
+    
+    var bonusTime = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.difficulty = "Hard"
-        print("test")
-        print("Difficulty: \(difficulty)")
+        self.difficulty = "Easy"
+
         diffSettings()
         
         var xPos = 240
@@ -61,9 +62,7 @@ class ViewController: UIViewController {
             self.generateBalloon();
             //self.genSpecBalloons()
         }
-        
-        print(self.view.frame.height)
-        print(self.view.frame.width)
+
         
         self.view = view
         
@@ -79,6 +78,8 @@ class ViewController: UIViewController {
     }
     
     func diffSettings() {
+        
+        
         switch difficulty {
         case("Easy"):
             remainTime = 60
@@ -100,11 +101,23 @@ class ViewController: UIViewController {
     }
     
     @objc func counter() {
+        if (remainTime <= 0) {
+            
+            let alertController = UIAlertController(title: "Ran out of time!", message: "GAME OVER", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Play Again?", style: .default, handler: {action in
+                self.startOver()
+                self.timer.invalidate()
+            }))
+            self.present(alertController, animated: true, completion: nil)
+        }
         remainTime -= 1
         if ((timeKeeper % 20 == 0) && (timeKeeper != 0)) {
             genSpecBalloons()
-            print("SpecOps Balloons generated")
         }
+        if (bonusTime > 0) {
+            bonusTime -= 1
+        }
+        cleanBalloons()
         timeKeeper += 1
         timerLabel.text = "Timer: \(remainTime)"
         timerLabel.frame = CGRect(x: 100, y: 50, width: timerLabel.intrinsicContentSize.width, height: 26.5)
@@ -114,19 +127,27 @@ class ViewController: UIViewController {
 
         var tempFrame = CGRect(x: givePos(), y: 612, width: 100, height: 100)
         var balloon = UIButton(frame: tempFrame)
-        balloon.setImage(UIImage(named: "color1-3.png"), for: .normal)
-        balloon.tag = 51
+        balloon.setImage(UIImage(named: "color1-4.png"), for: .normal)
+        balloon.tag = 998
+        balloon.titleLabel!.text = String(timeKeeper)
         array.append(balloon)
         view.addSubview(balloon)
+        var tempAnimationTime = animationTime
+        
+        animationTime = 3
         buttonAnimation(button: balloon)
         
         tempFrame = CGRect(x: givePos(), y: 612, width: 100, height: 100)
         balloon = UIButton(frame: tempFrame)
-        balloon.setImage(UIImage(named: "color1-4.png"), for: .normal)
-        balloon.tag = 52
+        balloon.setImage(UIImage(named: "color1-3.png"), for: .normal)
+        balloon.tag = 997
+        balloon.titleLabel!.text = String(timeKeeper)
         array.append(balloon)
         view.addSubview(balloon)
+        
+        animationTime = 12
         buttonAnimation(button: balloon)
+        animationTime = tempAnimationTime
     }
     
     func generateBalloon() {
@@ -136,8 +157,7 @@ class ViewController: UIViewController {
         if (numBalloons > 0) {
             
             numChance = Int.random(in: 0...numBalloons)
-            print("numChance: \(numChance)")
-            print("numBalloons: \(numBalloons)")
+
             for i in 0...numChance {
                 
                 givenPos = givePos()
@@ -147,7 +167,7 @@ class ViewController: UIViewController {
                 tempX  = givenPos
                 
                 let tempFrame = CGRect(x: givenPos, y: 612, width: 100, height: 100)
-                let balloon = UIButton.balloonButton(frame: tempFrame, buttonTitle: array.count)
+                let balloon = UIButton.balloonButton(frame: tempFrame, buttonTitle: timeKeeper)
                 array.append(balloon)
                 view.addSubview(balloon)
                 buttonAnimation(button: balloon)
@@ -155,7 +175,7 @@ class ViewController: UIViewController {
         } else {
             
             let tempFrame = CGRect(x: givePos(), y: 612, width: 100, height: 100)
-            let balloon = UIButton.balloonButton(frame: tempFrame, buttonTitle: array.count)
+            let balloon = UIButton.balloonButton(frame: tempFrame, buttonTitle: timeKeeper)
             array.append(balloon)
             view.addSubview(balloon)
             buttonAnimation(button: balloon)
@@ -166,17 +186,86 @@ class ViewController: UIViewController {
 
         if let index = array.firstIndex(of: button){
             array.remove(at: index);
-            print("Balloon Array: \(array.count)");
+
         }
         button.removeFromSuperview()
     }
     
-    func buttonAnimation(button: UIButton) {
-        UIView.animate(withDuration: 10.0, delay: 0, options: [.allowUserInteraction, .curveLinear], animations: {
+    func cleanBalloons() {
+
+        for balloon in array {
+
+            let timeDiff = timeKeeper - balloon.tag
+            if (timeDiff > animationTime) {
+                removeBalloon(button: balloon)
+            }
+        }
+    }
+    
+    func slowBalloons() {
+        
+        for balloon in array {
             
-            button.frame.origin.y -= 900
-            //testButton.addTarget(self, action: #selector(self.buttonPressed(_:)), for: .touchUpInside)
-        }, completion: nil)
+            if (balloon.tag != 997) {
+                
+                UIView.animate(withDuration: TimeInterval(15), delay: 0, options: [.allowUserInteraction, .curveLinear], animations: {
+                    
+                    balloon.frame.origin.y -= 900
+                }, completion: nil)
+            }
+        }
+    }
+    
+    func sanitizeScreen() {
+
+        for balloon in array {
+
+            if let removeIndex = array.firstIndex(of: balloon){
+                array.remove(at: removeIndex)
+                balloon.removeFromSuperview()
+            }
+        }
+        timeKeeper = 0
+        bonusTime = 0
+        diffSettings()
+        //viewDidLoad()
+    }
+    
+    func startOver() {
+        
+        for balloon in array {
+
+            if let removeIndex = array.firstIndex(of: balloon){
+                array.remove(at: removeIndex)
+                balloon.removeFromSuperview()
+            }
+        }
+        timeKeeper = 0
+        bonusTime = 0
+        diffSettings()
+        viewDidLoad()
+    }
+    
+    func buttonAnimation(button: UIButton) {
+        
+        print("Bonus Time: \(bonusTime)")
+        print("Time Keeper")
+        
+        if (bonusTime > 0) {
+            
+            UIView.animate(withDuration: TimeInterval(15), delay: 0, options: [.allowUserInteraction, .curveLinear], animations: {
+                
+                button.frame.origin.y -= 900
+                //testButton.addTarget(self, action: #selector(self.buttonPressed(_:)), for: .touchUpInside)
+            }, completion: nil)
+        } else {
+            
+            UIView.animate(withDuration: TimeInterval(animationTime), delay: 0, options: [.allowUserInteraction, .curveLinear], animations: {
+                
+                button.frame.origin.y -= 900
+                //testButton.addTarget(self, action: #selector(self.buttonPressed(_:)), for: .touchUpInside)
+            }, completion: nil)
+        }
     }
     
     func givePos() -> Int {
@@ -200,14 +289,19 @@ class ViewController: UIViewController {
     @objc func buttonPressed(_ sender: UIButton) {
 
         let buttonTitle = sender.titleLabel?.text
-        let alertController = UIAlertController(title: buttonTitle, message: "Hello, you pressed the button", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        let alertController = UIAlertController(title: buttonTitle, message: "GAME OVER", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Play Again?", style: .default, handler: {action in
+            self.startOver()
+            self.timer.invalidate()
+        }))
         
-        if (sender.tag == 51) {
-            self.present(alertController, animated: true, completion: nil)
+        if (sender.tag == 998) { //bonus balloon
+            bonusTime = 6
+            slowBalloons()
         }
-        if (sender.tag == 52) {
+        if (sender.tag == 997) { //bad balloon
             self.present(alertController, animated: true, completion: nil)
+
         }
         
         score += 1
@@ -238,6 +332,7 @@ extension UIButton {
         
         let testButton = UIButton(type: .system)
         testButton.frame = frame
+        testButton.tag = buttonTitle
         //testButton.tintColor = .brown
         testButton.layer.cornerRadius = 12
         let overlay = UIImage(named: "star.png")
@@ -261,8 +356,7 @@ extension UIButton {
         }
         
         return testButton
-//        self.array.append(testButton)
-//        print(self.array.count)
+
     }
 }
 
