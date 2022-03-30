@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     var diffSemaphore = 0
     var gameSemaphore = 0
     
+    var chosenGame = 0
+    var chosenDifficulty = ""
+    
     let labelOptions: [String] = ["Easy", "Medium", "Hard", "Balloon Pop", "Sorting Game", "Memory Game"]
     
     override func viewDidLoad() {
@@ -58,23 +61,29 @@ class ViewController: UIViewController {
     //Game Options
     @IBAction func memoryPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenGame = 1
     }
     @IBAction func sortingPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenGame = 2
     }
     @IBAction func balloonsPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenGame = 3
     }
     
     //Difficulty Options
     @IBAction func easyPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenDifficulty = "Easy"
     }
     @IBAction func mediumPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenDifficulty = "Medium"
     }
     @IBAction func hardPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
+        chosenDifficulty = "Hard"
     }
     
     
@@ -89,6 +98,23 @@ class ViewController: UIViewController {
         if (gameSemaphore == 0) {
             alertController.message = "No game selected"
             self.present(alertController, animated: true, completion: nil)
+        }
+        
+        if (chosenGame == 3) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultVC = storyBoard.instantiateViewController(withIdentifier: "BalloonGame")as! BalloonGame
+            //self.performSegue(withIdentifier: "BalloonGame", sender: self)
+            //self.present(resultVC, animated:true, completion:nil)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BalloonGame" {
+            if let destination = segue.destination as? BalloonGame {
+                
+                destination.data = chosenDifficulty
+            }
         }
     }
 }
