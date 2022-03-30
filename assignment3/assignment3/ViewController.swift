@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     var gameSemaphore = 0
     
     var chosenGame = 0
-    var chosenDifficulty = ""
+    var chosenDifficulty = 0
     
     let labelOptions: [String] = ["Easy", "Medium", "Hard", "Balloon Pop", "Sorting Game", "Memory Game"]
     
@@ -75,15 +75,15 @@ class ViewController: UIViewController {
     //Difficulty Options
     @IBAction func easyPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
-        chosenDifficulty = "Easy"
+        chosenDifficulty = 1
     }
     @IBAction func mediumPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
-        chosenDifficulty = "Medium"
+        chosenDifficulty = 2
     }
     @IBAction func hardPressed(_ sender: UIButton) {
         gameMutex(itemTag: sender.tag)
-        chosenDifficulty = "Hard"
+        chosenDifficulty = 3
     }
     
     
@@ -102,16 +102,16 @@ class ViewController: UIViewController {
         
         if (chosenGame == 3) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultVC = storyBoard.instantiateViewController(withIdentifier: "BalloonGame")as! BalloonGame
+            let resultVC = storyBoard.instantiateViewController(withIdentifier: "Test")as! Test
             //self.performSegue(withIdentifier: "BalloonGame", sender: self)
-            //self.present(resultVC, animated:true, completion:nil)
+            self.present(resultVC, animated:true, completion:nil)
         }
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BalloonGame" {
-            if let destination = segue.destination as? BalloonGame {
+        if segue.identifier == "Test" {
+            if let destination = segue.destination as? Test {
                 
                 destination.data = chosenDifficulty
             }

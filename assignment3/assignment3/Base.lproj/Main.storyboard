@@ -100,7 +100,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="play"/>
                                 <connections>
                                     <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ck2-Wp-e0v"/>
-                                    <segue destination="tOm-uL-raW" kind="show" id="HdV-te-5dN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-Qg-BEr">
@@ -143,16 +142,17 @@
                         <outlet property="memoryButton" destination="sf7-5c-R3S" id="Zxf-Dp-for"/>
                         <outlet property="playButton" destination="ey2-kD-5lp" id="ecb-24-vH8"/>
                         <outlet property="sortingButton" destination="Vfk-mQ-9oR" id="wdd-ch-7rP"/>
+                        <segue destination="tOm-uL-raW" kind="show" id="dwP-Fn-oUU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="853.125" y="83.59375"/>
         </scene>
-        <!--View Controller-->
+        <!--Test-->
         <scene sceneID="WZW-Ym-R1N">
             <objects>
-                <viewController id="tOm-uL-raW" sceneMemberID="viewController">
+                <viewController id="tOm-uL-raW" customClass="Test" customModule="assignment3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f4v-qY-Ql5">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,10 +8,18 @@
 import UIKit
 
 class Test: UIViewController {
+    
+    var data = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let testLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        testLabel.text = "TEST: \(data)"
+        testLabel.backgroundColor = .black
+        testLabel.textColor = .red
+        testLabel.textAlignment = .center
+        view.addSubview(testLabel)
         // Do any additional setup after loading the view.
     }
     
