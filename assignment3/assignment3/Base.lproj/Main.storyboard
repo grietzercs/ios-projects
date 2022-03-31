@@ -96,6 +96,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="play"/>
                                 <connections>
                                     <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ck2-Wp-e0v"/>
+                                    <segue destination="tOm-uL-raW" kind="show" id="Vmu-zk-Wqg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-Qg-BEr">
@@ -125,14 +126,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhO-IC-m3r">
-                                <rect key="frame" x="807" y="574" width="124" height="64"/>
+                                <rect key="frame" x="752" y="574" width="179" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="DarkGreen"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="High Scores">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
                                 <connections>
-                                    <segue destination="n9R-Pn-Oxq" kind="popoverPresentation" popoverAnchorView="vhO-IC-m3r" id="nZQ-qn-18K">
+                                    <segue destination="n9R-Pn-Oxq" kind="popoverPresentation" popoverAnchorView="vhO-IC-m3r" id="6gZ-Gp-HUy">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -152,7 +155,6 @@
                         <outlet property="memoryButton" destination="sf7-5c-R3S" id="Zxf-Dp-for"/>
                         <outlet property="playButton" destination="ey2-kD-5lp" id="ecb-24-vH8"/>
                         <outlet property="sortingButton" destination="Vfk-mQ-9oR" id="wdd-ch-7rP"/>
-                        <segue destination="tOm-uL-raW" kind="show" id="dwP-Fn-oUU"/>
                         <segue destination="CCe-q1-uGM" kind="show" id="Jsa-g6-Gxt"/>
                     </connections>
                 </viewController>
@@ -160,29 +162,13 @@
             </objects>
             <point key="canvasLocation" x="853.125" y="83.59375"/>
         </scene>
-        <!--View Controller-->
+        <!--High Scores-->
         <scene sceneID="nXB-4S-6rd">
             <objects>
-                <viewController id="n9R-Pn-Oxq" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HighScores" storyboardIdentifier="HighScores" id="n9R-Pn-Oxq" customClass="HighScores" customModule="assignment3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fbs-nq-beQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="680"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ay-1i-OGD">
-                                <rect key="frame" x="123" y="66" width="129" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYS-Sa-gku">
-                                <rect key="frame" x="107" y="281" width="161" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="YAA-4D-1fP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -191,10 +177,10 @@
             </objects>
             <point key="canvasLocation" x="852.5390625" y="914.84375"/>
         </scene>
-        <!--Test-->
+        <!--Memory Game-->
         <scene sceneID="WZW-Ym-R1N">
             <objects>
-                <viewController restorationIdentifier="Test" storyboardIdentifier="Test" id="tOm-uL-raW" customClass="Test" customModule="assignment3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MemoryGame" storyboardIdentifier="MemoryGame" id="tOm-uL-raW" customClass="MemoryGame" customModule="assignment3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f4v-qY-Ql5">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,9 +236,6 @@
         <namedColor name="DarkGreen">
             <color red="0.0" green="0.39399999380111694" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

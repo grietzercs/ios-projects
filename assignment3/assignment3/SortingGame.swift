@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  SortingGame
-//
-//  Created by Colden on 3/30/22.
-//
 
 import UIKit
 
@@ -40,11 +34,7 @@ class SortingGame: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //difficulty = "Easy"
-//
-//        let viewImage = UIImage(named: "air")
-//
-//        let view = UIView()
+
         view.backgroundColor = UIColor(patternImage: UIImage(named: "air-land-water.png")!)
         let itemView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
         //itemView.backgroundColor = .darkGray
@@ -67,10 +57,7 @@ class SortingGame: UIViewController {
         landView.alpha = 0.5
         view.addSubview(landView)
         sections.append(landView)
-//
-//        let tempView = UIImageView(frame: CGRect(x: 50, y: 500, width: 100, height: 100))
-//        tempView.image = UIImage(named: "8.png")
-//        view.addSubview(tempView)
+
         
         timerLabel = UILabel.headerLabel(xPoint: 100, text: "Time: 0")
         view.addSubview(timerLabel)
@@ -102,9 +89,9 @@ class SortingGame: UIViewController {
         for i in 1...numItems {
             let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
             let rand = Int.random(in: 0..<tempArray.count)
-            //let image = DraggableImageView(frame: CGRect(x: xPos, y: 100, width: imageWH, height: imageWH))
+
             let image = UIImageView(frame: CGRect(x: xPos, y: 100, width: imageWH, height: imageWH))
-            image.image = UIImage(named: "\(tempArray[rand]).png")
+            image.image = UIImage(named: "\(tempArray[rand])-1.png")
             image.isUserInteractionEnabled = true
             image.addGestureRecognizer(gesture)
             image.tag = i

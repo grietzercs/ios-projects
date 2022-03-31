@@ -4,10 +4,12 @@
 //
 //  Created by Colden on 3/26/22.
 //
-
+import AVFoundation
 import UIKit
 
 class BalloonGame: UIViewController {
+    
+    var audioPlayer: AVAudioPlayer!
     
     var newPos = 0
     var array: [UIButton] = []
@@ -101,9 +103,46 @@ class BalloonGame: UIViewController {
         }
     }
     
+    func postScore() {
+        let userDefaults = UserDefaults.standard
+        
+        var order: String!
+        let gameType = "BalloonGame"
+        var diff: String!
+        switch difficulty {
+        case 1:
+            diff = "Easy"
+        case 2:
+            diff = "Medium"
+        case 3:
+            diff = "Hard"
+        default:
+            diff = "Easy"
+        }
+        
+        var tempArray = [String]()
+        tempArray = userDefaults.stringArray(forKey: "scores")!
+        if (tempArray != nil) {
+            
+            let tempInt = tempArray.count
+            order = String(tempInt)
+            let inputString = "\t \(order)\t\t \(gameType)\t\t \(diff)\t\t \(score)"
+            tempArray.append(inputString)
+            userDefaults.set(tempArray, forKey: "scores")
+        } else {
+            
+            let inputString = "\t 1\t\t \(gameType)\t\t \(diff)\t\t \(score)"
+            var newArray = [String]()
+            newArray.append(inputString)
+            userDefaults.set(newArray, forKey: "scores")
+        }
+        
+    }
+    
     @objc func counter() {
         if (remainTime <= 0) {
             
+            postScore()
             let alertController = UIAlertController(title: "Ran out of time!", message: "GAME OVER", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Play Again?", style: .default, handler: {action in
                 self.startOver()
@@ -288,6 +327,14 @@ class BalloonGame: UIViewController {
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
+        
+        let bubblePopSound = URL(fileURLWithPath: Bundle.main.path(forResource: "bubblepop", ofType: "mp3")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: bubblePopSound)
+            audioPlayer.play()
+        } catch {
+            print(error)
+        }
 
         let buttonTitle = sender.titleLabel?.text
         let alertController = UIAlertController(title: buttonTitle, message: "GAME OVER", preferredStyle: .alert)

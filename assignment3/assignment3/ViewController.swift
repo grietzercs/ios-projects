@@ -131,24 +131,17 @@ class ViewController: UIViewController {
             //self.present(resultVC, animated:true, completion:nil)
             navigationController?.pushViewController(resultVC, animated: true)
         }
-        
-//        if (sender.tag == 0) {
-//            guard let destVC = mainStoryboard.instantiateViewController(withIdentifier: "RecentOrdersViewController") as? RecentOrdersViewController else {
-//                print("Couldn't find the new controller")
-//                return
-//            }
-//            navigationController?.pushViewController(destVC, animated: true)
-//        }
-        
+        if (chosenGame == 1) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            guard let resultVC = storyBoard.instantiateViewController(withIdentifier: "MemoryGame") as? MemoryGame else {
+                print("Could not find controller")
+                return
+            }
+            resultVC.difficulty = chosenDifficulty
+            //self.performSegue(withIdentifier: "BalloonGame", sender: self)
+            //self.present(resultVC, animated:true, completion:nil)
+            navigationController?.pushViewController(resultVC, animated: true)
+        }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "Test" {
-//            if let destination = segue.destination as? Test {
-//                
-//                destination.data = chosenDifficulty
-//            }
-//        }
-//    }
 }
 

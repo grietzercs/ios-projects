@@ -19,8 +19,9 @@
 		34DE19FA27EA38030096172D /* assignment3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE19F927EA38030096172D /* assignment3UITestsLaunchTests.swift */; };
 		34DE1A8727F3711D0096172D /* BalloonGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1A8627F3711D0096172D /* BalloonGame.swift */; };
 		34DE1B8627F4ED9C0096172D /* SortingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8427F4ED9C0096172D /* SortingGame.swift */; };
-		34DE1B8927F4EE670096172D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8827F4EE670096172D /* Test.swift */; };
 		34DE1B8B27F546150096172D /* HighScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8A27F546150096172D /* HighScores.swift */; };
+		34DE1B8F27F54C950096172D /* bubblepop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34DE1B8E27F54C950096172D /* bubblepop.mp3 */; };
+		34DE1B9327F569570096172D /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B9227F569570096172D /* MemoryGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +58,9 @@
 		34DE19F927EA38030096172D /* assignment3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignment3UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		34DE1A8627F3711D0096172D /* BalloonGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonGame.swift; sourceTree = "<group>"; };
 		34DE1B8427F4ED9C0096172D /* SortingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingGame.swift; sourceTree = "<group>"; };
-		34DE1B8827F4EE670096172D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		34DE1B8A27F546150096172D /* HighScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScores.swift; sourceTree = "<group>"; };
+		34DE1B8E27F54C950096172D /* bubblepop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubblepop.mp3; sourceTree = "<group>"; };
+		34DE1B9227F569570096172D /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +116,14 @@
 				34DE19D727EA38020096172D /* ViewController.swift */,
 				34DE19D927EA38020096172D /* Main.storyboard */,
 				34DE19DF27EA38030096172D /* Assets.xcassets */,
+				34DE1B8E27F54C950096172D /* bubblepop.mp3 */,
 				34DE19E127EA38030096172D /* LaunchScreen.storyboard */,
 				34DE19E427EA38030096172D /* Info.plist */,
 				34DE19DC27EA38020096172D /* assignment3.xcdatamodeld */,
 				34DE1A8627F3711D0096172D /* BalloonGame.swift */,
 				34DE1B8427F4ED9C0096172D /* SortingGame.swift */,
-				34DE1B8827F4EE670096172D /* Test.swift */,
 				34DE1B8A27F546150096172D /* HighScores.swift */,
+				34DE1B9227F569570096172D /* MemoryGame.swift */,
 			);
 			path = assignment3;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			files = (
 				34DE19E327EA38030096172D /* LaunchScreen.storyboard in Resources */,
 				34DE19E027EA38030096172D /* Assets.xcassets in Resources */,
+				34DE1B8F27F54C950096172D /* bubblepop.mp3 in Resources */,
 				34DE19DB27EA38020096172D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,9 +281,9 @@
 				34DE1A8727F3711D0096172D /* BalloonGame.swift in Sources */,
 				34DE1B8B27F546150096172D /* HighScores.swift in Sources */,
 				34DE19DE27EA38020096172D /* assignment3.xcdatamodeld in Sources */,
-				34DE1B8927F4EE670096172D /* Test.swift in Sources */,
 				34DE19D827EA38020096172D /* ViewController.swift in Sources */,
 				34DE19D427EA38020096172D /* AppDelegate.swift in Sources */,
+				34DE1B9327F569570096172D /* MemoryGame.swift in Sources */,
 				34DE19D627EA38020096172D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
