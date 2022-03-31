@@ -42,6 +42,15 @@ class ViewController: UIViewController {
         sortingButton.tag = 5
         memoryButton.tag = 6
         
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "back-main.png")!).withAlphaComponent(0.5)
+        
+//        balloonsButton.frame = CGRect(x: 785, y: 80, width: balloonsButton.intrinsicContentSize.width, height: balloonsButton.intrinsicContentSize.height)
+//        let point = view.frame.width - (view.frame.width/2)
+//        balloonsButton.center = CGPoint(x: 900, y: 164)
+//
+//        sortingButton.frame = CGRect(x: 785, y: 80, width: sortingButton.intrinsicContentSize.width, height: sortingButton.intrinsicContentSize.height)
+//        sortingButton.center = CGPoint(x: 512, y: 164)
+        
     }
     
     func gameMutex(itemTag: Int) {
@@ -87,7 +96,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func playPressed(_ sender: Any) {
+    @IBAction func playPressed(_ sender: UIButton) {
         var alertController = UIAlertController(title: "Missing option", message: "More than one option selected", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
         
@@ -102,20 +111,44 @@ class ViewController: UIViewController {
         
         if (chosenGame == 3) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultVC = storyBoard.instantiateViewController(withIdentifier: "Test")as! Test
+            guard let resultVC = storyBoard.instantiateViewController(withIdentifier: "BalloonGame") as? BalloonGame else {
+                print("Could not find controller")
+                return
+            }
+            resultVC.difficulty = chosenDifficulty
             //self.performSegue(withIdentifier: "BalloonGame", sender: self)
-            self.present(resultVC, animated:true, completion:nil)
+            //self.present(resultVC, animated:true, completion:nil)
+            navigationController?.pushViewController(resultVC, animated: true)
         }
+        if (chosenGame == 2) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            guard let resultVC = storyBoard.instantiateViewController(withIdentifier: "SortingGame") as? SortingGame else {
+                print("Could not find controller")
+                return
+            }
+            resultVC.difficulty = chosenDifficulty
+            //self.performSegue(withIdentifier: "BalloonGame", sender: self)
+            //self.present(resultVC, animated:true, completion:nil)
+            navigationController?.pushViewController(resultVC, animated: true)
+        }
+        
+//        if (sender.tag == 0) {
+//            guard let destVC = mainStoryboard.instantiateViewController(withIdentifier: "RecentOrdersViewController") as? RecentOrdersViewController else {
+//                print("Couldn't find the new controller")
+//                return
+//            }
+//            navigationController?.pushViewController(destVC, animated: true)
+//        }
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Test" {
-            if let destination = segue.destination as? Test {
-                
-                destination.data = chosenDifficulty
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Test" {
+//            if let destination = segue.destination as? Test {
+//                
+//                destination.data = chosenDifficulty
+//            }
+//        }
+//    }
 }
 

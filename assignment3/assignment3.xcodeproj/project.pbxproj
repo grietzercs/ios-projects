@@ -20,6 +20,7 @@
 		34DE1A8727F3711D0096172D /* BalloonGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1A8627F3711D0096172D /* BalloonGame.swift */; };
 		34DE1B8627F4ED9C0096172D /* SortingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8427F4ED9C0096172D /* SortingGame.swift */; };
 		34DE1B8927F4EE670096172D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8827F4EE670096172D /* Test.swift */; };
+		34DE1B8B27F546150096172D /* HighScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE1B8A27F546150096172D /* HighScores.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		34DE1A8627F3711D0096172D /* BalloonGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonGame.swift; sourceTree = "<group>"; };
 		34DE1B8427F4ED9C0096172D /* SortingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingGame.swift; sourceTree = "<group>"; };
 		34DE1B8827F4EE670096172D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		34DE1B8A27F546150096172D /* HighScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScores.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				34DE1A8627F3711D0096172D /* BalloonGame.swift */,
 				34DE1B8427F4ED9C0096172D /* SortingGame.swift */,
 				34DE1B8827F4EE670096172D /* Test.swift */,
+				34DE1B8A27F546150096172D /* HighScores.swift */,
 			);
 			path = assignment3;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				34DE1B8627F4ED9C0096172D /* SortingGame.swift in Sources */,
 				34DE1A8727F3711D0096172D /* BalloonGame.swift in Sources */,
+				34DE1B8B27F546150096172D /* HighScores.swift in Sources */,
 				34DE19DE27EA38020096172D /* assignment3.xcdatamodeld in Sources */,
 				34DE1B8927F4EE670096172D /* Test.swift in Sources */,
 				34DE19D827EA38020096172D /* ViewController.swift in Sources */,

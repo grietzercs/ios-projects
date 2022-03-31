@@ -11,7 +11,7 @@ class SortingGame: UIViewController {
     
     var imageArray = [Int]()
     var itemArray = [UIImageView]()
-    var difficulty = ""
+    var difficulty = 0
     var numItems = 0
     
     var timer = Timer()
@@ -40,27 +40,30 @@ class SortingGame: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        difficulty = "Easy"
-        
+        //difficulty = "Easy"
+//
+//        let viewImage = UIImage(named: "air")
+//
+//        let view = UIView()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "air-land-water.png")!)
         let itemView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
-        itemView.backgroundColor = .darkGray
+        //itemView.backgroundColor = .darkGray
         view.addSubview(itemView)
         
         let skyView = UIView(frame: CGRect(x: 0, y: 210, width: view.frame.width, height: 220))
-        skyView.backgroundColor = .brown
+        //skyView.backgroundColor = .brown
         skyView.alpha = 0.5
         view.addSubview(skyView)
         sections.append(skyView)
         
         let waterView = UIView(frame: CGRect(x: 0, y: 430, width: 830, height: 180))
-        waterView.backgroundColor = .brown
+        //waterView.backgroundColor = .brown
         waterView.alpha = 0.5
         view.addSubview(waterView)
         sections.append(waterView)
         
         let landView = UIView(frame: CGRect(x: 600, y: 610, width: 450, height: 150))
-        landView.backgroundColor = .purple
+        //landView.backgroundColor = .purple
         landView.alpha = 0.5
         view.addSubview(landView)
         sections.append(landView)
@@ -127,19 +130,19 @@ class SortingGame: UIViewController {
     func diffSettings() {
         
         switch difficulty {
-        case("Easy"):
+        case 1:
             numItems = 8
             remainTime = 60
             xPos = 50
             imageWH = 100
             xIncr = 120
-        case("Medium"):
+        case 2:
             numItems = 10
             remainTime = 45
             xPos = 20
             imageWH = 80
             xIncr = 100
-        case("Hard"):
+        case 3:
             numItems = 12
             remainTime = 30
             xPos = 50
@@ -169,6 +172,8 @@ class SortingGame: UIViewController {
         
         remainTime -= 1
         timeKeeper += 1
+        timerLabel.text = "Timer: \(remainTime)"
+        timerLabel.frame = CGRect(x: 100, y: 700, width: timerLabel.intrinsicContentSize.width, height: timerLabel.intrinsicContentSize.height)
     }
     
     func checkTouch() {
