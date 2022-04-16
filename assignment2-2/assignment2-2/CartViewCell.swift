@@ -1,23 +1,18 @@
 //
-//  TableViewCell.swift
+//  CartViewCell.swift
 //  assignment2-2
 //
-//  Created by Colden on 3/7/22.
+//  Created by Colden on 3/8/22.
 //
 
-import UIKit; import SwiftUI; 
+import Foundation
+import UIKit
 
-class TableViewCell: UITableViewCell {
+class CartViewCell: UITableViewCell {
     
-    
-    @IBOutlet weak var addToCart: UIButton!
-    
-    @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var tableCellLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
     
-    var sendData = TableViewController()
-    
-    let categoryName: [String] = ["Grocery", "Clothing", "Movie", "Garden", "Electronic", "Book", "Appliance", "Toy"]
     
     struct Category {
         var groceryImages: [String] = ["grocery-1-tomatoes", "grocery-2-bananas", "grocery-3-gala", "grocery-4-lettuce", "grocery-5-broccoli"]
@@ -30,23 +25,12 @@ class TableViewCell: UITableViewCell {
         var toyImages: [String] = ["car", "firetruck", "doll", "slinky", "spinning-top"]
     }
     
-    @IBOutlet weak var tableCellLabel: UILabel!
-    
     func configure(with cellLabel: String, with image: String, with index: Int, with passedData: Int) {
-        //let test = "Passed Tag: \(passedData)"
-        
-        let category = Category()
-        self.addToCart.tag = index
-        self.tag = index
-        cellImage.image = UIImage(named: category.groceryImages[index])
-        tableCellLabel.text = cellLabel
-    }
-    
-    
-    @IBAction func addToCart(_ sender: Any) {
-        let vc = sendData.storyboard?.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController
-        vc?.cell = self
-        sendData.navigationController?.pushViewController(vc!, animated: true)
-    }
 
+        
+    }
+    
+    class func setData(sentImage: UIImage, sentText: String) {
+        
+    }
 }
