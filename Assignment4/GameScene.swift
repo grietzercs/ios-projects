@@ -63,6 +63,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var energyLabel: SKLabelNode!
     
     var food: SKSpriteNode!
+    var energy = 300
+    var hearts = 3.0
+    var rocks = 10
+    
+    var rockCounter = 0
+    var gravityCounter = 0
+    var randGravityCounter = 0
     
     var dino1: SKSpriteNode!
     var dino2: SKSpriteNode!
@@ -71,6 +78,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var leftEdge: SKSpriteNode!
     var rightEdge: SKSpriteNode!
+    
+    var zeroEnergy = 0
     
     private var soundURL: URL!//2. Make it into a URL form
     private var AUDIOPLAYER: AVAudioPlayer! //3. Create and Audio Player
@@ -94,6 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Obstacle: UInt32 = 12
         static let Fireball: UInt32 = 14
         static let Star: UInt32 = 16
+        static let Food: UInt32 = 18
         
         static let leftEdge: UInt32 = 8
         static let rightEdge: UInt32 = 8
@@ -101,13 +111,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Dino1: UInt32 = 20
         static let Dino2: UInt32 = 22
         static let Dino3: UInt32 = 24
-        static let Dino4: UInt32 = 26
-    }
-    
-    struct DinoCategory {
-        
-        var dino: SKSpriteNode
-        var physCat: UInt32
     }
     
     override func sceneDidLoad() {
@@ -133,8 +136,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     
         addUI()
-        addDinos()
+        addDino1()
+        addDino2()
+        addDino3()
+        addDino4()
         addStar()
+        addFood()
+        
+        //generate random gravity time
+        randGravityCounter = Int.random(in: 40...60)
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
                     timer in
@@ -150,142 +160,258 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(timeBlock)
     }
     
-    func addStar() -> SKSpriteNode {
+    func addStar() {
         let star = SKSpriteNode(imageNamed: "star")
+        var cont = false
         
-        var xCoord = Int.random(in: 0...15)
-        var xPos = (xCoord*64)+32
-        var yCoord = Int.random(in: 1...9)
-        var yPos = (yCoord*64)+32
-        
-        if (checkGrids(xCoord: xCoord, yCoord: yCoord)) {
-            star.position = CGPoint(x: xPos, y: yPos)
-            star.physicsBody = SKPhysicsBody(circleOfRadius: star.frame.width/2)
-            star.physicsBody?.affectedByGravity = false
-            star.physicsBody?.isDynamic = false
-            star.physicsBody?.categoryBitMask = PhysicsCategory.Star
-            grid[xCoord][yCoord] = star
-            star.zPosition = 700
+        while (!cont) {
+            let xCoord = Int.random(in: 0...15)
+            let xPos = (xCoord*64)+32
+            let yCoord = Int.random(in: 1...9)
+            let yPos = (yCoord*64)+32
+            
+            if (checkGrids(xCoord: xCoord, yCoord: yCoord)) {
+                star.position = CGPoint(x: xPos, y: yPos)
+                star.physicsBody = SKPhysicsBody(circleOfRadius: star.frame.width/2)
+                star.physicsBody?.affectedByGravity = false
+                star.physicsBody?.isDynamic = false
+                star.physicsBody?.categoryBitMask = PhysicsCategory.Star
+                star.zPosition = 701
+                
+                grid[xCoord][yCoord] = star
+                cont = true
+            }
         }
         
-        return star
+        addChild(star)
     }
     
-    func addFood() -> SKSpriteNode {
+    func addFood() {
         let food = SKSpriteNode(imageNamed: "food")
+        var cont = false
         
-        var xCoord = Int.random(in: 0...15)
-        var xPos = (xCoord*64)+32
-        var yCoord = Int.random(in: 1...9)
-        var yPos = (yCoord*64)+32
+        var xCoord: Int
+        var yCoord: Int
+        var xPos: Int = 0
+        var yPos: Int = 0
         
-        repeat{
-            rand_grid_x = arc4random_uniform(16) + 0
-            rand_grid_y  = arc4random_uniform(9) + 1
-        } while (indexOfElementInGrids(x: rand_grid_x, y: rand_grid_y) > -1)
-
-        grids.append([CGFloat(rand_grid_x), CGFloat(rand_grid_y)]) //호랑수월가
+        while (!cont) {
+            xCoord = Int.random(in: 0...15)
+            xPos = (xCoord*64)+32
+            yCoord = Int.random(in: 1...9)
+            yPos = (yCoord*64)+32
+            
+            if (checkGrids(xCoord: xCoord, yCoord: yCoord)) {
+                food.position = CGPoint(x: xPos, y: yPos)
+                food.physicsBody = SKPhysicsBody(circleOfRadius: food.frame.width/2)
+                food.physicsBody?.affectedByGravity = false
+                food.physicsBody?.isDynamic = false
+                food.physicsBody?.categoryBitMask = PhysicsCategory.Food
+                food.physicsBody?.contactTestBitMask = PhysicsCategory.Dino1 | PhysicsCategory.Dino2 | PhysicsCategory.Dino3 | PhysicsCategory.Player
+                
+                grid[xCoord][yCoord] = food
+                food.zPosition = 705
+                cont = true
+            }
+        }
         
-        food.size = CGSize(width: 85.375, height: 85.375)
-        food.position = CGPoint(x: block.frame.width/2 + CGFloat(rand_grid_x)*block.frame.width, y: block.frame.width/2 + CGFloat(rand_grid_y) * block.frame.width)
+//        food.size = CGSize(width: 85.375, height: 85.375)
+//        food.position = CGPoint(x: grid[0][0]!.frame.width/2 + CGFloat(xPos)*grid[0][0]!.frame.width, y: grid[0][0]!.frame.width/2 + CGFloat(yPos) * grid[0][0]!.frame.width)
+//
+//        food.zPosition = 784
+//        food.physicsBody = SKPhysicsBody(circleOfRadius: food.frame.width/2)
+//        food.physicsBody?.affectedByGravity = false
+//        food.physicsBody?.isDynamic = false
+//        food.name = "food"
+//        food.physicsBody?.categoryBitMask = PhysicsCategory.Food
+//        food.physicsBody?.contactTestBitMask = PhysicsCategory.Dino1 | PhysicsCategory.Dino2 | PhysicsCategory.Dino3 | PhysicsCategory.Player
         
-        food.zPosition = 780
-        food.physicsBody = SKPhysicsBody(circleOfRadius: food.frame.width/2)
-        food.physicsBody?.affectedByGravity = false
-        food.physicsBody?.isDynamic = false
-        food.name = "food"
-        food.physicsBody?.categoryBitMask = PhysicsCategoryStruct.food
-        food.physicsBody?.contactTestBitMask = PhysicsCategoryStruct.dino1 | PhysicsCategoryStruct.dino2 | PhysicsCategoryStruct.dino3collider | PhysicsCategoryStruct.caveman
-        return food
+        addChild(food)
     }
     
-    func addDinos() {
+//    func foodContacted(eater: SKSpriteNode)
+//        {
+//            var gridX = ((food.position.x - block.frame.width/2)/block.frame.width)
+//            var gridY = ((food.position.y - block.frame.width/2)/block.frame.width)
+//
+//            gridX = gridX.rounded(.up)
+//            gridY = gridY.rounded(.up)
+//
+//            grids.remove(at: indexOfElementInGrids(x: UInt32(gridX), y: UInt32(gridY)))
+//
+//            food.removeFromParent() //1. Remove old star
+//            let makefood = SKAction.run {
+//                self.food = self.addFood() //Chose a random unoccupied grid
+//                self.addChild(self.food)
+//            }
+//
+//            if eater.name == "caveman"
+//            {
+//                run(makefood) //2. Create new food
+//                if ENERGY >= 250
+//                {
+//                    ENERGY = 300 //3. Update HEARTS (life) if ENERGY reaches 300
+//                    ENERGY_LBL.text = "\(ENERGY)"
+//                    if(HEARTS < 3) {HEARTS += 1}      //Only add a heart if it is less than 3
+//                    HEART_LBL.text = "\(Int(HEARTS.rounded(.up)))" //Update label
+//                }
+//                else
+//                {
+//                    ENERGY += 50
+//                    ENERGY_LBL.text = "\(ENERGY)"
+//                    if(HEARTS < 3) {HEARTS += 0.5}
+//                }
+//                checkEnergyValueUpdateHeart()
+//                energyIsZero = false
+//            }
+//            else //eater is dino(1,2 or 3)
+//            {
+//                run(SKAction.sequence([SKAction.wait(forDuration: 10), makefood]) ) //2. Create new food after 10 sec
+//            }
+//        }
+    
+    func addDino1() {
         
         let posArray = [352, 800]
         let spawnPoint = posArray.randomElement()//may delete
         
-        dino1 = SKSpriteNode.Dino(position: CGPoint(x: 352, y: 32), name: "Dino1")
+        dino1 = SKSpriteNode.Dino(position: CGPoint(x: 352, y: 32), name: "Dino1", zPos: 759)
         addChild(dino1)
         dino1.moveUpDown(dino: dino1)
         
-        var xPos = Int.random(in: 0...15)
+        var xPos = Int.random(in: 10...15)
         xPos = (xPos*64)+32
         var yPos = Int.random(in: 1...9)
         yPos = (yPos*64)+32
+    }
     
-        dino2 = SKSpriteNode.Dino(position: CGPoint(x: xPos, y: yPos), name: "Dino2")
+    func addDino2() {
+        
+        var xPos = Int.random(in: 10...15)
+        xPos = (xPos*64)+32
+        var yPos = Int.random(in: 1...9)
+        yPos = (yPos*64)+32
+        
+        dino2 = SKSpriteNode.Dino(position: CGPoint(x: xPos, y: yPos), name: "Dino2", zPos: 760)
         addChild(dino2)
         dino2.moveLeftRight(dino: dino2)
+    }
+    
+    func addDino3() {
         
-        dino3 = SKSpriteNode.Dino(position: CGPoint(x: 32, y: 608), name: "Dino3")
-        dino3.physicsBody?.collisionBitMask = PhysicsCategory.Dino2 | PhysicsCategory.Dino1 | PhysicsCategory.Border | PhysicsCategory.Player | PhysicsCategory.leftEdge | PhysicsCategory.rightEdge
+        dino3 = SKSpriteNode.Dino(position: CGPoint(x: 32, y: 608), name: "Dino3", zPos: 761)
+        dino3.physicsBody?.collisionBitMask = PhysicsCategory.Dino2 | PhysicsCategory.Dino1 | PhysicsCategory.Border | PhysicsCategory.Player | PhysicsCategory.leftEdge | PhysicsCategory.rightEdge | PhysicsCategory.Rock
         dino3.physicsBody?.contactTestBitMask = dino3.physicsBody!.collisionBitMask
         addChild(dino3)
         dino3.moveAround(dino: dino3)
-        
-        dino4 = SKSpriteNode.Dino(position: CGPoint(x: 32, y: 672), name: "Dino4")
+    }
+    
+    func addDino4() {
+
+        dino4 = SKSpriteNode(imageNamed: "Dino4")
+        dino4.position = CGPoint(x: 32, y: 672)
+        dino4.name = "Dino4"
+        dino4.zPosition = 730
+        dino4.physicsBody = SKPhysicsBody(circleOfRadius: dino4.frame.width/2)
+        dino4.physicsBody?.affectedByGravity = false
         dino4.physicsBody?.isDynamic = false
         addChild(dino4)
-        dino4.moveLeftRight(dino: dino4)
+        dino4.moveRightLeft(dino: dino4)
         
         let wait = SKAction.wait(forDuration: TimeInterval(Int.random(in: 5...10)))
-        let shootFire = SKAction.run { self.dino4Fire() }
-        let sequence = SKAction.sequence([shootFire, wait])
+        let spitFlames = SKAction.run { self.shootFire() }
+        let sequence = SKAction.sequence([spitFlames, wait])
         dino4.run(SKAction.repeatForever(sequence))
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        
-        print("Contact detected")
          
-        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Player && contact.bodyB.categoryBitMask == PhysicsCategory.Obstacle) || (contact.bodyB.categoryBitMask == PhysicsCategory.Obstacle && contact.bodyA.categoryBitMask == PhysicsCategory.Player) || (contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Border) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Border && contact.bodyA.categoryBitMask == PhysicsCategory.Player)) {
+        //dino hit by player
+        if ((contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino1 && contact.bodyA.categoryBitMask == PhysicsCategory.Player) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Dino2) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino2 && contact.bodyA.categoryBitMask == PhysicsCategory.Player)) {
             
             print("Player touched block")
             player.removeAction(forKey: "playerMove")
             //gameOver()
         }
+        
+        //dino1 hit by rock
+        if ((contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino1 && contact.bodyA.categoryBitMask == PhysicsCategory.Rock) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino2) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino2 && contact.bodyA.categoryBitMask == PhysicsCategory.Rock) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyA.categoryBitMask == PhysicsCategory.Rock)) {
+            
+            if (contact.bodyA.categoryBitMask == PhysicsCategory.Rock) {
+                contact.bodyA.node?.removeFromParent()
+                dinoHit(dino: contact.bodyB.node! as! SKSpriteNode)
+                
+            } else {
+                contact.bodyB.node?.removeFromParent()
+                dinoHit(dino: contact.bodyA.node! as! SKSpriteNode)
+            }
+            //gameOver()
+        }
+        
+        //player hit edge
         if ((contact.bodyA.categoryBitMask == PhysicsCategory.Player && contact.bodyB.categoryBitMask == PhysicsCategory.leftEdge) || (contact.bodyB.categoryBitMask == PhysicsCategory.leftEdge && contact.bodyA.categoryBitMask == PhysicsCategory.Player) || (contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.rightEdge) ||
             (contact.bodyB.categoryBitMask == PhysicsCategory.rightEdge && contact.bodyA.categoryBitMask == PhysicsCategory.Player)) {
             
             print("Player touched block")
-            player.removeAction(forKey: "playerMove")
+            player.removeAllActions()
+            if let nextMove = player.action(forKey: "playerMove") {
+                nextMove.speed = 0
+            }
             //gameOver()
         }
         
-        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyB.categoryBitMask == PhysicsCategory.leftEdge) ||  (contact.bodyB.categoryBitMask == PhysicsCategory.leftEdge && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3) || (contact.bodyB.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyA.categoryBitMask == PhysicsCategory.rightEdge) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.rightEdge && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyA.categoryBitMask == PhysicsCategory.Border) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Border && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyA.categoryBitMask == PhysicsCategory.Obstacle) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Obstacle && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Dino3 && contact.bodyA.categoryBitMask == PhysicsCategory.Player) ||
-            (contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Dino3)) {
+        //fire hit player
+        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Player && contact.bodyB.categoryBitMask == PhysicsCategory.Fireball) ||
+            (contact.bodyB.categoryBitMask == PhysicsCategory.Fireball && contact.bodyA.categoryBitMask == PhysicsCategory.Player)) {
             
-            print("Dino3 touched block")
-            player.removeAction(forKey: "Dino3Move")
-            dino3.moveAround(dino: dino3)
+            if (contact.bodyA.categoryBitMask == PhysicsCategory.Fireball) {
+                contact.bodyA.node?.removeFromParent()
+                fireHitPlayer()
+            } else {
+                contact.bodyB.node?.removeFromParent()
+                fireHitPlayer()
+            }
             //gameOver()
         }
-/** DINO1 BLOCK **/
-//        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Dino1 && contact.bodyB.categoryBitMask == PhysicsCategory.Player) || (contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1)) {
-//            //insert code
-//        }
-//
-//        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Dino1 && contact.bodyB.categoryBitMask == PhysicsCategory.Rock) || (contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1)) {
-//            //insert code
-//        }
-//
-//        if ((contact.bodyA.categoryBitMask == PhysicsCategory.Dino1 && contact.bodyB.categoryBitMask == PhysicsCategory.Border) || (contact.bodyB.categoryBitMask == PhysicsCategory.Border && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1)) {
-//
-//            print("Dino touched wall")
-//
-//            dino1.removeAction(forKey: "Dino1Move")
-//            let waitTime = Int.random(in: 1...3)
-//            sleep(3)
-//            dino1.moveUpDown(dino: dino1)
-//            //insert code
-//        }
+    }
+    
+    func dinoHit(dino: SKSpriteNode) {
+        
+        let cond = dino.physicsBody?.categoryBitMask
+        var addDino: SKAction!
+        
+        dino.removeFromParent()
+        let waitReappaear = SKAction.wait(forDuration: TimeInterval(Int.random(in: 1...5)))
+        
+        switch cond {
+        case(20):
+            dino1.run(SKAction.sequence([waitReappaear, SKAction.run(addDino1)]))
+        case(22):
+            dino2.run(SKAction.sequence([waitReappaear, SKAction.run(addDino2)]))
+        case(24):
+            dino3.run(SKAction.sequence([waitReappaear, SKAction.run(addDino3)]))
+        default:
+            print("no dino found")
+            //no dino to be called
+        }
+    }
+    
+    func fireHitPlayer() {
+        
+        if (energy >= 100) {
+            energy -= 1
+            hearts -= 1
+            energyLabel.text = "\(energy)"
+            heartLabel.text = "\(hearts)"
+        }
     }
     
     override func didMove(to view: SKView) {
@@ -302,36 +428,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let playerLoc = CGPoint(x: player.frame.midX, y: player.frame.midY)
-        let rock = SKSpriteNode(imageNamed: "rock")
-        rock.position = playerLoc
-        rock.setScale(0.5)
-    
-        let touched = touches.first
-        let touchLoc = touched?.location(in: self)
-        //let locCoords = CGPoint(x: touchLoc!.x, y: self.size.height-touchLoc!.y)
+        if (rocks > 0) {
+            
+            let playerLoc = CGPoint(x: player.frame.midX, y: player.frame.midY)
+            let rock = SKSpriteNode(imageNamed: "rock")
+            rock.position = playerLoc
+            rock.setScale(0.5)
         
-        let offset = touchLoc!-rock.position
-        if offset.x < 0 {return}
-        addChild(rock)
-        
-        let direction = offset.normalized()
-        let shootDist = direction * 1000
-        let travelDist = shootDist + rock.position
-        
-//            var lastPoint = CGPoint(x: locCoords.x+300, y: locCoords.y+300)
-//            var dist = sqrt(pow(lastPoint.x - rock.frame.origin.x,2)+pow(lastPoint.y - rock.frame.origin.y,2))
-//            let dur = dist/200
-        
-        let rockGo = SKAction.move(to: travelDist, duration: 2)
-        let doneMoving = SKAction.removeFromParent()
-        
-        rock.physicsBody = SKPhysicsBody(circleOfRadius: rock.frame.width/2)
-        rock.physicsBody?.categoryBitMask = PhysicsCategory.Rock
-        rock.physicsBody?.collisionBitMask = PhysicsCategory.Dino1
-        rock.physicsBody?.contactTestBitMask = rock.physicsBody!.collisionBitMask
-        
-        rock.run(SKAction.sequence([rockGo, doneMoving]))
+            let touched = touches.first
+            let touchLoc = touched?.location(in: self)
+            //let locCoords = CGPoint(x: touchLoc!.x, y: self.size.height-touchLoc!.y)
+            
+            let offset = touchLoc!-rock.position
+            if offset.x < 0 {return}
+            addChild(rock)
+            
+            let direction = offset.normalized()
+            let shootDist = direction * 1000
+            let travelDist = shootDist + rock.position
+            
+            let rockGo = SKAction.move(to: travelDist, duration: 2)
+            let doneMoving = SKAction.removeFromParent()
+            
+            rock.physicsBody = SKPhysicsBody(circleOfRadius: rock.frame.width/2)
+            rock.physicsBody?.categoryBitMask = PhysicsCategory.Rock
+            rock.physicsBody?.collisionBitMask = PhysicsCategory.Dino1
+            rock.physicsBody?.contactTestBitMask = rock.physicsBody!.collisionBitMask
+            
+            rock.run(SKAction.sequence([rockGo, doneMoving]))
+            rocks -= 1
+            rockLabel.text = "\(rocks)"
+        }
     }
     
     @objc func swiped(_ sender: UISwipeGestureRecognizer) {
@@ -360,29 +487,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         uiHeart = SKSpriteNode(imageNamed: "heart")
         uiHeart.position = CGPoint(x: 160, y: 32)
-        //uiHeart.zPosition = 0
+        uiHeart.zPosition = 801
         heartLabel = SKLabelNode.customLabel()
+        heartLabel.text = "\(hearts.rounded(.up))"
         addChild(uiHeart)
         uiHeart.addChild(heartLabel)
         
         uiRock = SKSpriteNode(imageNamed: "rock")
         uiRock.position = CGPoint(x: 96, y: 32)
         uiRock.setScale(0.8)
-        //uiRock.zPosition = 0
+        uiRock.zPosition = 801
         rockLabel = SKLabelNode.customLabel()
+        rockLabel.text = "\(rocks)"
         uiRock.addChild(rockLabel)
         
         uiStar = SKSpriteNode(imageNamed: "star")
         uiStar.position = CGPoint(x: 32, y: 32)
-        //uiStar.zPosition = 0
+        uiStar.zPosition = 801
         starLabel = SKLabelNode.customLabel()
         uiStar.addChild(starLabel)
         
         uiEnergy = SKSpriteNode(imageNamed: "battery")
         uiEnergy.position = CGPoint(x: 224, y: 32)
-        //uiEnergy.zPosition = 0
+        uiEnergy.zPosition = 801
         uiEnergy.setScale(1.3)
         energyLabel = SKLabelNode.customLabel()
+        energyLabel.text = "\(energy)"
         uiEnergy.addChild(energyLabel)
         
         
@@ -425,9 +555,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func counter() {
         
         passedTime += 1
+        rockCounter += 1
+        gravityCounter += 1
+        energy += 1
+        
         timeBlock.text = "Timer: \(passedTime)"
         if (passedTime < 16) {
             genRandObstacle()
+        }
+        if (rockCounter == 30) {
+            if (rocks < 20) {
+                rocks += 1
+            }
+            rockLabel.text = "\(rocks)"
+        }
+        //gravity time hit
+        if (gravityCounter == randGravityCounter) {
+            player.physicsBody?.affectedByGravity = true
+            player.run(SKAction.wait(forDuration: 1.0))
+            gravityCounter = 0
+            randGravityCounter = Int.random(in: 40...60)
+        }
+        //reset gravity after use
+        if (gravityCounter == (randGravityCounter + 1)) {
+            gravityCounter = 0
+            randGravityCounter = Int.random(in: 40...60)
+        }
+        // energy low, sacrificing energy for hearts
+        if ((energy == 0) && (hearts > 0)) {
+            hearts -= 1
+            heartLabel.text = "\(hearts)"
+            energy += 100
+            energyLabel.text = "\(energy)"
+        }
+        if (hearts == 0) {
+            heartLabel.text = "\(hearts)"
+            //insert gameOver
         }
     }
     
@@ -499,7 +662,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brickBlock.physicsBody = SKPhysicsBody(circleOfRadius: brickBlock.frame.width/2)
         brickBlock.physicsBody?.affectedByGravity = false
         brickBlock.physicsBody?.categoryBitMask = PhysicsCategory.Border
-        brickBlock.physicsBody?.collisionBitMask = PhysicsCategory.Player | PhysicsCategory.Dino1 | PhysicsCategory.Dino2 | PhysicsCategory.Dino3 | PhysicsCategory.Dino4
+        brickBlock.physicsBody?.collisionBitMask = PhysicsCategory.Player | PhysicsCategory.Dino3
         brickBlock.physicsBody?.contactTestBitMask = brickBlock.physicsBody!.collisionBitMask
         brickBlock.physicsBody?.isDynamic = false
         //}
@@ -539,7 +702,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return swipeGestureRecognizer
     }
     
-    func dino4Fire() {
+    func shootFire() {
         
         let fireball = addFire()
         addChild(fireball)
@@ -562,17 +725,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     func addFire() -> SKSpriteNode {
         
-        var fire: SKSpriteNode!
-        fire = SKSpriteNode(imageNamed: "fire")
-        fire.size = CGSize(width: 78, height: 78)
-        fire.position = CGPoint(x: dino4.position.x, y: dino4.position.y - 50)
-        fire.physicsBody = SKPhysicsBody(circleOfRadius: (fire.frame.width - 6)/2)
-        fire.physicsBody?.categoryBitMask = PhysicsCategory.Fireball
-        fire.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-        fire.physicsBody?.collisionBitMask = PhysicsCategory.Player
-        fire.physicsBody?.affectedByGravity = false
-        fire.physicsBody?.isDynamic = true
-        return fire
+        var fireball: SKSpriteNode!
+        fireball = SKSpriteNode(imageNamed: "fire")
+        fireball.size = CGSize(width: 78, height: 78)
+        fireball.position = CGPoint(x: dino4.position.x, y: dino4.position.y - 50)
+        fireball.physicsBody = SKPhysicsBody(circleOfRadius: (fireball.frame.width - 6)/2)
+        fireball.physicsBody?.categoryBitMask = PhysicsCategory.Fireball
+        fireball.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        fireball.physicsBody?.collisionBitMask = PhysicsCategory.Player
+        fireball.physicsBody?.affectedByGravity = false
+        fireball.physicsBody?.isDynamic = true
+        return fireball
     }
 }
 
@@ -581,7 +744,7 @@ extension SKLabelNode {
         
         let returnLabel = SKLabelNode(text: "0")
         returnLabel.position = CGPoint(x: 0, y: 0)
-        //returnLabel.zPosition = 1
+        returnLabel.zPosition = 802
         returnLabel.fontSize = 24
         returnLabel.fontName = returnLabel.fontName! + "-Bold"
         returnLabel.fontColor = .black
@@ -636,6 +799,29 @@ extension SKSpriteNode {
         dino.run(seqForever)
     }
     
+    func moveRightLeft(yPos: Int = 0, dino: SKSpriteNode) {
+
+        var temp = yPos
+
+        let direction = Int.random(in: 0...1)
+        if (direction == 0) {
+            temp = -768
+        } else {
+            temp = 768
+        }
+
+        let mvLeft = SKAction.moveBy(x: -1024, y: 0, duration: 6)
+        let mvRight = SKAction.moveBy(x: 1024, y: 0, duration: 6)
+        let flip = SKAction.scaleX(to: -1, duration: 0)
+        let flip2 = SKAction.scaleX(to: 1, duration: 0)
+        let wait = SKAction.wait(forDuration: TimeInterval(Int.random(in: 1...3)))
+        mvLeft.timingMode = .easeIn
+        mvRight.timingMode = .easeIn
+        let sequence = SKAction.sequence([mvRight, wait, flip, mvLeft, flip2, wait])
+        let seqForever = SKAction.repeatForever(sequence)
+        dino.run(seqForever)
+    }
+    
     func moveAround(dino: SKSpriteNode) {
         
         dino.removeAllActions()
@@ -678,13 +864,16 @@ extension SKSpriteNode {
     }
 
     
-    class func Dino(position: CGPoint, name: String) -> SKSpriteNode {
+    class func Dino(position: CGPoint, name: String, zPos: CGFloat) -> SKSpriteNode {
         
         struct PhysicsCategory {
             static let Player: UInt32 = 1
             static let Rock: UInt32 = 4
             static let Border: UInt32 = 10
             static let Obstacle: UInt32 = 12
+            static let Fireball: UInt32 = 14
+            static let Star: UInt32 = 16
+            static let Food: UInt32 = 18
             
             static let leftEdge: UInt32 = 8
             static let rightEdge: UInt32 = 8
@@ -692,7 +881,6 @@ extension SKSpriteNode {
             static let Dino1: UInt32 = 20
             static let Dino2: UInt32 = 22
             static let Dino3: UInt32 = 24
-            static let Dino4: UInt32 = 26
         }
         
         
@@ -701,8 +889,8 @@ extension SKSpriteNode {
         dino.position = position
         dino.physicsBody = SKPhysicsBody(circleOfRadius: dino.frame.width/2)
         dino.physicsBody?.affectedByGravity = false
-        dino.physicsBody?.collisionBitMask = PhysicsCategory.Border | PhysicsCategory.Player | PhysicsCategory.leftEdge | PhysicsCategory.rightEdge
-        dino.physicsBody?.contactTestBitMask = dino.physicsBody!.collisionBitMask
+        dino.physicsBody?.collisionBitMask = PhysicsCategory.Rock
+        dino.physicsBody?.contactTestBitMask = PhysicsCategory.Rock | PhysicsCategory.Food
         dino.physicsBody?.isDynamic = false
         dino.physicsBody?.allowsRotation = false
         
@@ -713,8 +901,6 @@ extension SKSpriteNode {
             dino.physicsBody?.categoryBitMask = PhysicsCategory.Dino2
         case "Dino3":
             dino.physicsBody?.categoryBitMask = PhysicsCategory.Dino3
-        case "Dino4":
-            dino.physicsBody?.categoryBitMask = PhysicsCategory.Dino4
         default:
             dino.physicsBody?.categoryBitMask = PhysicsCategory.Dino1
         }
