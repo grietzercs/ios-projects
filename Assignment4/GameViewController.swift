@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
             if let scene = GameScene(size: self.view.bounds.size) as? GameScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
+                scene.backgroundColor = UIColor(patternImage: UIImage(named: "bg")!)
                 
                 // Present the scene
                 view.presentScene(scene)

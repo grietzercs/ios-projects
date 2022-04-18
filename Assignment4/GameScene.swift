@@ -109,13 +109,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func sceneDidLoad() {
-        
-        label = SKLabelNode(text: "First SpriteKit Game")
-        label.position = CGPoint(x: self.size.width/2, y: self.size.height/3)
-        label.fontSize = 40
-        label.fontColor = .red
-        addChild(label)
-        self.backgroundColor = .white //changing it in gamescene
+        self.backgroundColor = .white
+        //self.backgroundColor = UIColor(patternImage: UIImage(named: "bg")!)
         
         addPlayer()
         generateGrid()
@@ -138,14 +133,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addStar()
         addFood()
         
-        //generate random gravity time
         randGravityCounter = Int.random(in: 40...60)
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
                     timer in
                     self.counter();
-                    //self.generateBalloon();
-                    //self.genSpecBalloons()
+
         }
         
         timeBlock = SKLabelNode(text: "Time: \(passedTime)")
