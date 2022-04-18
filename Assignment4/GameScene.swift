@@ -275,7 +275,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addDino1() {
         
         let posArray = [352, 800]
-        let spawnPoint = posArray.randomElement()//may delete
+        let spawnPoint = posArray.randomElement()
         
         dino1 = SKSpriteNode.Dino(position: CGPoint(x: 352, y: 32), name: "Dino1", zPos: 759)
         addChild(dino1)
@@ -501,7 +501,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addDino3()
         default:
             print("no dino found")
-            //no dino to be called
+
         }
     }
     
@@ -509,8 +509,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
-        //let swipeGR = UISwipeGestureRecognizer(target: self, action: #selector(swiped))
-        //swipeGR.direction = [.right]
         self.view?.addGestureRecognizer(createSwipeGestureRecognizer(for: .up))
         self.view?.addGestureRecognizer(createSwipeGestureRecognizer(for: .right))
         self.view?.addGestureRecognizer(createSwipeGestureRecognizer(for: .left))
@@ -528,7 +526,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             let touched = touches.first
             let touchLoc = touched?.location(in: self)
-            //let locCoords = CGPoint(x: touchLoc!.x, y: self.size.height-touchLoc!.y)
             
             let offset = touchLoc!-rock.position
             if offset.x < 0 {return}
@@ -634,8 +631,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let yPos = (yCoord*64)+32
             
             if (checkGrids(xCoord: xCoord, yCoord: yCoord)) {
-//                print("Print Log RandGen: Grid[\(xCoord)][\(yCoord)]")
-//                print(checkGrids(xCoord: xCoord, yCoord: yCoord))
+
                 
                 let obstacle = SKSpriteNode(imageNamed: "block")
                 obstacle.position = CGPoint(x: xPos, y: yPos)
@@ -672,19 +668,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             rockLabel.text = "\(rocks)"
         }
-        //gravity time hit
+        
         if (gravityCounter == randGravityCounter) {
             player.physicsBody?.affectedByGravity = true
             player.run(SKAction.wait(forDuration: 1.0))
             gravityCounter = 0
             randGravityCounter = Int.random(in: 40...60)
         }
-        //reset gravity after use
+        
         if (gravityCounter == (randGravityCounter + 1)) {
             gravityCounter = 0
             randGravityCounter = Int.random(in: 40...60)
         }
-        // energy low, sacrificing energy for hearts
+        
         if ((energy == 0) && (hearts > 0)) {
             hearts -= 1
             heartLabel.text = "\(hearts.rounded(.up))"
@@ -694,7 +690,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (hearts <= 0) {
             heartLabel.text = "\(hearts)"
             player.removeFromParent()
-            gameOver()//insert gameOver
+            gameOver()
         }
     }
     
@@ -717,8 +713,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for j in 0..<16 {
 
                 grid[i][j] = nil
-                //grid[i][j]!.size = CGSize(width: 64, height: 64)
-                ///grid[i][j]!.position = CGPoint(x: xCoord, y: yCoord)
                 yCoord += 64
             }
             xCoord += 64
@@ -729,9 +723,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (grid[xCoord][yCoord] != nil) {
             return false
-            //if ((grid[xCoord][yCoord]?.position.x)! > 0) {
-                //return false
-            //}
         } else {
             return true
         }
@@ -785,7 +776,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let iGrid = ((xPos-32)/64)
         let jGrid = ((yPos-32)/64)
         grid[iGrid][jGrid] = brickBlock
-        //print("Block placed at grid: \(iGrid) \(jGrid)")
     }
     
     func addEdges() {
@@ -829,7 +819,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print(error)
         }
         
-        //Pythagorean Thm
         var xAccel = CGFloat(player.position.x - dino4.position.x)
         var yAccel = CGFloat(player.position.y - dino4.position.y)
         let hyp = sqrt(xAccel*xAccel + yAccel*yAccel)
