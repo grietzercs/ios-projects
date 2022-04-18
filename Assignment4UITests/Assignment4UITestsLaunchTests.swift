@@ -2,7 +2,7 @@
 //  Assignment4UITestsLaunchTests.swift
 //  Assignment4UITests
 //
-//  Created by Colden on 4/10/22.
+// 
 //
 
 import XCTest

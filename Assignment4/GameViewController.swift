@@ -2,7 +2,7 @@
 //  GameViewController.swift
 //  Assignment4
 //
-//  Created by Colden on 4/10/22.
+//  
 //
 
 import UIKit
