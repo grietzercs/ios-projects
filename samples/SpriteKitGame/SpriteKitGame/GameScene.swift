@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = .white
         
        label = SKLabelNode(text: "First SpriteKit Game")
-        label.position = CGPoint(x: 200, y: 200)
+        label.position = CGPoint(x: self.size.width/2, y: self.size.height/3)
         
         label.fontSize = 40
         label.fontColor = .red
@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         circle.fillColor = .green
         
         circle.position = CGPoint(x: 300, y: 500)
-        //addChild(circle)
+        addChild(circle)
         
         
         ball = SKSpriteNode(imageNamed: "tennisBall")
@@ -44,10 +44,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.position = CGPoint(x: 250, y: 650)
         
         addChild(ball)
-        addChild(circle)
+        //addChild(circle)
         
-        circle.zPosition = 1
-        
+        //circle.zPosition = 1
+        print("Ball zPosition: \(ball.zPosition) Circle: \(circle.zPosition)")
         
         ground = SKNode()
         ground.position = CGPoint(x: self.size.width/2, y: 20)
@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.xScale = 0.5
         sprite.yScale = 0.5
         // position is center of image
-        sprite.position =  CGPoint(x:self.frame.width/2, y:(sprite.frame.height/2))
+        sprite.position =  CGPoint(x:self.frame.width/2, y: 696)
         self.addChild(sprite)
         
         let propeller = SKSpriteNode(imageNamed: "PLANE PROPELLER 1")
@@ -92,28 +92,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let texture1 = SKTexture(imageNamed: "PLANE PROPELLER 1")
         let texture2 = SKTexture(imageNamed: "PLANE PROPELLER 2")
         
-        let animate = SKAction.animate(with: [texture1, texture2], timePerFrame: 0.1)
+        let animate = SKAction.animate(with: [texture1, texture2], timePerFrame: 0.005)
         let forever = SKAction.repeatForever(animate)
         
         
         propeller.run(forever, withKey: "propeller")
         
-        
-        
-        
-        
-        let mv = SKAction.moveBy(x: 0, y: 300, duration: 3)
+        let mv = SKAction.moveBy(x: 0, y: 500, duration: 3)
         
         //sprite.run(mv)
-        
-        
-        
-        
+
         
         let fade = SKAction.fadeOut(withDuration: 3)
         let gr = SKAction.sequence([mv, fade])
+        let revgr = gr.reversed()
+        let groupAction = SKAction.group([mv, fade])
+        //let testAction = SKAction.repeat(simul, count: 3)
         
-        sprite.run(gr)
+        
+        sprite.run(groupAction)
         
         //propeller.position = CGPoint(x: 0, y: sprite.size.height/2)
     }
@@ -131,6 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
+        print("Did reach this function")
         
         if ((contact.bodyA.categoryBitMask == PhysicsCategory.Ball && contact.bodyB.categoryBitMask == PhysicsCategory.Circle) || (contact.bodyB.categoryBitMask == PhysicsCategory.Ball && contact.bodyA.categoryBitMask == PhysicsCategory.Circle)){
             
@@ -160,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.frame.width/2)
         
         ball.physicsBody?.affectedByGravity = false
-        //ball.physicsBody?.allowsRotation = false
+        ball.physicsBody?.allowsRotation = false
         
         circle.physicsBody = SKPhysicsBody(circleOfRadius: circle.frame.width/2)
         circle.physicsBody?.affectedByGravity = false
