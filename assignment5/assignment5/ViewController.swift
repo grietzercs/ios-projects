@@ -20,20 +20,26 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        self.peerID = MCPeerID(displayName: UIDevice.current.name)
+        self.mcSession = MCSession(peer: peerID)
+        self.mcBrowser = MCBrowserViewController(serviceType: "testApp", session: mcSession)
+        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "testApp", discoveryInfo: nil, session: mcSession)
+        
+        mcAdvertiserAssistant.start()
         mcSession.delegate = self
-        mcBrowser = MCBrowserViewController(serviceType: "testApp", session: mcSession)
         mcBrowser.delegate = self
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-            case .connected: print ("connected \(peerID)")
-            case .connecting: print ("connecting \(peerID)")
-            case .notConnected: print ("not connected \(peerID)")
-            default: print("unknown status for \(peerID)")
-        }
+        
+        DispatchQueue.main.async(execute: {
+            switch state {
+            case MCSessionState.connected: print ("connected \(peerID.displayName)")
+            case MCSessionState.connecting: print ("connecting \(peerID.displayName)")
+            case MCSessionState.notConnected: print ("not connected \(peerID.displayName)")
+            default: print("unknown status for \(peerID.displayName)")
+            }
+        })
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -53,29 +59,28 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func buttonPressed(_ sender: Any) {
-        let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
-        
-        ac.addAction(UIAlertAction(title: "Host a session", style: .default) { (UIAlertAction) in
-            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "testApp", discoveryInfo: nil, session: self.mcSession)
-            self.mcAdvertiserAssistant.start()
-        })
-        
-        ac.addAction(UIAlertAction(title: "Join a session", style: .default) { (UIAlertAction) in
-//            self.mcBrowser = MCBrowserViewController(serviceType: "testApp", session: self.mcSession)
-//            self.mcBrowser.delegate = self
-            self.present(self.mcBrowser, animated: true, completion: nil)
-        })
-        
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(ac, animated: true)
+//        let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .alert)
+//
+//        ac.addAction(UIAlertAction(title: "Host a session", style: .default) { (UIAlertAction) in
+//            self.mcAdvertiserAssistant.start()
+//        })
+//
+//        ac.addAction(UIAlertAction(title: "Join a session", style: .default) { (UIAlertAction) in
+////            self.mcBrowser = MCBrowserViewController(serviceType: "testApp", session: self.mcSession)
+////            self.mcBrowser.delegate = self
+//            self.present(self.mcBrowser, animated: true, completion: nil)
+//        })
+//
+//        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(mcBrowser, animated: true, completion: nil)
     }
     
 }

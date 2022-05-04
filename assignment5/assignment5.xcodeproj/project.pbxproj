@@ -17,6 +17,8 @@
 		349AC1722821C4BE00648C87 /* assignment5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC1712821C4BE00648C87 /* assignment5Tests.swift */; };
 		349AC17C2821C4BE00648C87 /* assignment5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC17B2821C4BE00648C87 /* assignment5UITests.swift */; };
 		349AC17E2821C4BE00648C87 /* assignment5UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC17D2821C4BE00648C87 /* assignment5UITestsLaunchTests.swift */; };
+		349AC18B282284C200648C87 /* SingleQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC18A282284C200648C87 /* SingleQuiz.swift */; };
+		349AC18D2822856600648C87 /* MultiQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC18C2822856600648C87 /* MultiQuiz.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		349AC1772821C4BE00648C87 /* assignment5UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = assignment5UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		349AC17B2821C4BE00648C87 /* assignment5UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignment5UITests.swift; sourceTree = "<group>"; };
 		349AC17D2821C4BE00648C87 /* assignment5UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignment5UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		349AC18A282284C200648C87 /* SingleQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleQuiz.swift; sourceTree = "<group>"; };
+		349AC18C2822856600648C87 /* MultiQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiQuiz.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				349AC1652821C4BE00648C87 /* LaunchScreen.storyboard */,
 				349AC1682821C4BE00648C87 /* Info.plist */,
 				349AC1602821C4BD00648C87 /* assignment5.xcdatamodeld */,
+				349AC18A282284C200648C87 /* SingleQuiz.swift */,
+				349AC18C2822856600648C87 /* MultiQuiz.swift */,
 			);
 			path = assignment5;
 			sourceTree = "<group>";
@@ -261,8 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				349AC18D2822856600648C87 /* MultiQuiz.swift in Sources */,
 				349AC15C2821C4BD00648C87 /* ViewController.swift in Sources */,
 				349AC1582821C4BD00648C87 /* AppDelegate.swift in Sources */,
+				349AC18B282284C200648C87 /* SingleQuiz.swift in Sources */,
 				349AC1622821C4BD00648C87 /* assignment5.xcdatamodeld in Sources */,
 				349AC15A2821C4BD00648C87 /* SceneDelegate.swift in Sources */,
 			);
