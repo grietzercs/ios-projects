@@ -1,9 +1,4 @@
-//
-//  MultiQuiz.swift
-//  assignment5
-//
-//  Created by Colden on 5/4/22.
-//
+
 
 import UIKit
 

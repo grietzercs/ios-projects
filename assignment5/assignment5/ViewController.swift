@@ -1,9 +1,4 @@
-//
-//  ViewController.swift
-//  assignment5
-//
-//  Created by Colden on 5/3/22.
-//
+
 
 import UIKit
 import MultipeerConnectivity
