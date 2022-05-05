@@ -1,0 +1,30 @@
+{
+    "numberOfQuestions": 4,
+    "questions": [
+                  {
+                  "number": 1,
+                  "questionSentence": "Which of the following is used in pencils?",
+                  "options": {"A": "Silicon", "B": "Graphite", "C": "Charcoal", "D": "Phosphorous"},
+                  "correctOption": "B"
+                  },
+                   {
+                  "number": 2,
+                  "questionSentence": "What was the first ARPANET message?",
+                  "options": {"A": "lo", "B": "Hello world", "C": "mary had a little lamb", "D": "cyberspace"},
+                  "correctOption": "A"
+                  },
+		   {
+                  "number": 3,
+                  "questionSentence": "The hardest substance available on earth is",
+                  "options": {"A": "Platinum", "B": "Gold", "C": "Iron", "D": "Diamond"},
+                  "correctOption": "D"
+                  },
+                  {
+                  "number": 4,
+                  "questionSentence": "What kind of waves are used to make and receive cellphone calls?",
+                  "options": {"A": "Radio", "B": "Sound", "C": "Gravity", "D": "Light"},
+                  "correctOption": "A"
+                  }
+                  ],
+    "topic": "Science and Technology"
+}
