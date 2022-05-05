@@ -47,13 +47,13 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         let ac = UIAlertController(title: "Connection Request", message: "'\(peerID.displayName)' wants to connect", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak self] _ in
-                    invitationHandler(true, self?.mcSession)
-                }))
-                ac.addAction(UIAlertAction(title: "Decline", style: .cancel, handler: { _ in
-                    invitationHandler(false, nil)
-                }))
-                present(ac, animated: true)
+        ac.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak self] _ in
+            invitationHandler(true, self?.mcSession)
+        }))
+        ac.addAction(UIAlertAction(title: "Decline", style: .cancel, handler: { _ in
+            invitationHandler(false, nil)
+        }))
+        present(ac, animated: true)
         //invitationHandler(true, mcSession)
     }
     
@@ -87,7 +87,13 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
+        DispatchQueue.main.async {
+            if let recievedMessage = NSKeyedUnarchiver.unarchiveObject(with: data) as? String {
+                if recievedMessage == "StartGame" {
+                    self.performSegue(withIdentifier: "multiMode", sender: self)
+                }
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -121,7 +127,7 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
         }
         if ((!singlePlayer) && (mcSession.connectedPeers.count < 4)) {
             print("Got this far")
-            let data = NSKeyedArchiver.archivedData(withRootObject: "Root")
+            let data = NSKeyedArchiver.archivedData(withRootObject: "StartGame")
             do {
                 try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
             } catch let outputError {

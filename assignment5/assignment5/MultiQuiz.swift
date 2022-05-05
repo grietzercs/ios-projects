@@ -2,6 +2,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import CoreMotion
 
 class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDelegate {
 
@@ -16,16 +17,19 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
     @IBOutlet weak var optionC: UIButton!
     @IBOutlet weak var optionD: UIButton!
     
-    @IBOutlet var userAnswers: [UILabel]!
-    @IBOutlet var userScores: UILabel!
-    
     @IBOutlet weak var p1Ans: UILabel!
     @IBOutlet weak var p2Ans: UILabel!
     @IBOutlet weak var p3Ans: UILabel!
     @IBOutlet weak var p4Ans: UILabel!
     
+    @IBOutlet weak var p1Score: UILabel!
+    @IBOutlet weak var p2Score: UILabel!
+    @IBOutlet weak var p3Score: UILabel!
+    @IBOutlet weak var p4Score: UILabel!
+    
     @IBOutlet weak var restartButton: UIButton!
     
+    var coreMotion = CMMotionManager()
     var mcSession: MCSession!
     var peerID: MCPeerID!
     
@@ -40,7 +44,9 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
     var questionNum = 0
     var defaultButtonColor: UIColor!
     
-    
+    var totalQuestions = 0
+    var dataFile = "data"
+    var done = false
     
     struct Questions : Codable {
         var number: Int
@@ -71,45 +77,54 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
         }
         parseJson()
         initializeValues()
+        coreMotion.deviceMotionUpdateInterval = 1/60
+        coreMotion.startDeviceMotionUpdates(using: .xArbitraryZVertical)
         //defaultButtonColor = optionA.tintColor
         
         // Do any additional setup after loading the view.
     }
     
     func initializeValues() {
+        questionNum = 0
+        currentTime = 20
+        totalQuestions = jsonData.numberOfQuestions
+        parseJson()
+        score = 0
         defaultButtonColor = optionA.tintColor
         correctAns = jsonData.questions[0].correctOption
         setButtonText()
         questionBox.text = jsonData.questions[0].questionSentence
-        QuestionPlace.text = "Question: 1/4"
+        QuestionPlace.text = "Question: 1/\(totalQuestions)"
         
-        for i in 0..<mcSession.connectedPeers.count {
-            userAnswers[i+1].text = "0"
-        }
+        self.p1Ans.text = "--"; self.p1Score.text = "0"
+        self.p2Ans.text = "--"; self.p2Score.text = "0"
+        self.p3Ans.text = "--"; self.p3Score.text = "0"
+        self.p4Ans.text = "--"; self.p4Score.text = "0"
+    }
+    
+    @IBAction func gameRestart(_ sender: Any) {
+        dataFile = "data2"
+        initializeValues()
     }
     
     func counter() {
-        if (currentTime == 0 && questionNum == 3) {
+        updatePos()
+        if (done) {
             //restartButton.isHidden = false
             timer.invalidate()
+//            for i in 0..<session.connectedPeers.count {
+//                if Int(arrayOfUserScores[0].text!)! >= Int(arrayOfUserScores[i+1].text!)! {
+//                    winLabel.text = "YOU WIN!"
+//                    return
+//                }
+//            }
         } else {
             if currentTime == 0 {
-                clearButtons()
-                confirm = false
-                questionNum += 1
-                
-                correctAns = jsonData.questions[questionNum].correctOption
-                setButtonText()
-                questionBox.text = jsonData.questions[questionNum].questionSentence
-                QuestionPlace.text = "Question: \(questionNum+1)/4"
-                
-                currentTime = 20
-                
                 if (givenAns == correctAns) {
                     print("Correct Answer!")
                     score += 1
                     scoreText.text = "Score: \(score)"
-                    userAnswers[0].text = String("\(score)")
+                    p1Score.text = String("\(score)")
                     
                     let currentScore = NSKeyedArchiver.archivedData(withRootObject: score)
                     do {
@@ -119,6 +134,21 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
                         print ("Error in sending Score \(outputError)")
                     }
                 }
+                
+                if (currentTime == 1) {
+                    done = true
+                }
+                clearButtons()
+                confirm = false
+                questionNum += 1
+                
+                correctAns = jsonData.questions[questionNum].correctOption
+                setButtonText()
+                questionBox.text = jsonData.questions[questionNum].questionSentence
+                QuestionPlace.text = "Question: \(questionNum+1)/\(totalQuestions)"
+                
+                currentTime = 20
+                
             } else {
                 currentTime -= 1
                 timeTextView.text = "Time: \(currentTime)"
@@ -128,7 +158,7 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
 
     func parseJson() {
         
-        let url = Bundle.main.url(forResource: "data", withExtension: "json")
+        let url = Bundle.main.url(forResource: dataFile, withExtension: "json")
         let data = try? Data(contentsOf: url!)
         
         do {
@@ -193,7 +223,7 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
     }
     
     func setPublicAns() {
-        userAnswers[0].text = givenAns
+        p1Ans.text = givenAns
         
         let sendingAns = NSKeyedArchiver.archivedData(withRootObject: givenAns)
         do {
@@ -266,8 +296,10 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
                 }
                 for i in 0..<session.connectedPeers.count {
                     if self.mcSession.connectedPeers[i] == self.peerID {
-                        self.userAnswers[i+1].text = sentAns
-
+                        self.p1Ans.text = sentAns
+                        self.p2Ans.text = sentAns
+                        self.p3Ans.text = sentAns
+                        self.p4Ans.text = sentAns
                     }
                 }
             }
@@ -275,11 +307,75 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
             if let sentInt = NSKeyedUnarchiver.unarchiveObject(with: data) as? Int{
                 for i in 0..<session.connectedPeers.count {
                     if session.connectedPeers[i] == peerID {
-                        self.userAnswers[i+1].text = String(sentInt)
+                        self.p1Score.text = String(sentInt)
+                        self.p2Score.text = String(sentInt)
+                        self.p3Score.text = String(sentInt)
+                        self.p4Score.text = String(sentInt)
                     }
                 }
             }
         })
+    }
+    
+    @objc func updatePos(){
+        
+        if let data = coreMotion.deviceMotion {
+            let attitude = data.attitude
+            let userAcceleration = data.userAcceleration
+            
+            if (attitude.roll > 1.0){
+                buttonSelection(sender: optionD)
+            }
+            
+            if(attitude.roll < -1.0){
+                buttonSelection(sender: optionC)
+            }
+            
+            if(attitude.pitch > 1.0){
+                buttonSelection(sender: optionA)
+            }
+            
+            if(attitude.pitch < -1.0){
+                buttonSelection(sender: optionB)
+            }
+            
+            if(userAcceleration.z < -1.0){
+                setChoice()
+                switch 1 {
+                case optionA.tag:
+                    buttonSelection(sender: optionA)
+                case optionB.tag:
+                    buttonSelection(sender: optionB)
+                case optionC.tag:
+                    buttonSelection(sender: optionC)
+                case optionD.tag:
+                    buttonSelection(sender: optionD)
+                default:
+                    givenAns = ""
+                }
+            }
+        }
+    }
+    
+    //Randomly choose answer when shake
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        
+        if motion == .motionShake {
+            let randChoice = Int.random(in: 0...2)
+            
+            switch randChoice{
+            case 0:
+                APressed(optionA)
+            case 1:
+                BPressed(optionB)
+                
+            case 2:
+                CPressed(optionC)
+                
+            default:
+                DPressed(optionD)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

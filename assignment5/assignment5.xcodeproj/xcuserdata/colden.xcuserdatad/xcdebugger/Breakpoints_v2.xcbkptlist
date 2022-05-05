@@ -8,15 +8,341 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F4F0B8B6-4560-41ED-9062-EF9B56AD288F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "assignment5/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "startClicked(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB"
+            shouldBeEnabled = "Yes"
+            condition = "currentTime==1"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "currentTime"
+            moduleName = "United States">
+            <Locations>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - eb89f947b75c4b46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[_UIFeedbackEngine currentTime]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - b207ca30c202e089"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIUndoGestureInteraction currentTime]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 6e23be2a2c6b1f81"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[_UIStatistics currentTime]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - fb9efbc3d9b3b7ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DOMHTMLMediaElement currentTime]"
+                  moduleName = "WebKitLegacy"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 450cd3caa233fa90"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PAL::ClockGeneric::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - bc1afa66cbcfb6f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::MediaPlayerPrivateAVFoundationObjC::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - bd10634e2fa58a05"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::MediaPlayerPrivateInterface::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - e95e7932f295fa33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::PlaybackSessionModelMediaElement::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - b532ae93f27a6dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::AnimationTimeline::currentTime()"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - cd5887c938e5a9be"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::DocumentTimeline::currentTime()"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 9bd00ab22d97ff44"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::MediaController::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 9ca1fb649fa0b348"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VideoFullscreenControllerContext::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 69134e0764487381"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::MediaPlayer::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 4720de6a153de68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WebCore::HTMLMediaElement::currentTime() const"
+                  moduleName = "WebCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 517cdeab09c68533"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GEORPUserLocationDetails currentTime]"
+                  moduleName = "GeoServices"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - c414385f571c417e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVAudioPlayer currentTime]"
+                  moduleName = "AVFAudio"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 8efc5a134ed6a5a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVAudioRecorder currentTime]"
+                  moduleName = "AVFAudio"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 9c6c81677efc4ff0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVAudioClock currentTime]"
+                  moduleName = "AVFAudio"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 84bc39590a80bf5f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVPlayer currentTime]"
+                  moduleName = "AVFCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 1840a3d3b8a818a8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVPlayerItem currentTime]"
+                  moduleName = "AVFCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 18c83fc6d7cea06a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AVSampleBufferRenderSynchronizer currentTime]"
+                  moduleName = "AVFCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 4fe1b75fe711c1d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCNRenderer currentTime]"
+                  moduleName = "SceneKit"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 51fa7a8d4136dc99"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCNMetalLayer currentTime]"
+                  moduleName = "SceneKit"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 6e5655c9a56d6bb0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MNTracePlayer currentTime]"
+                  moduleName = "Navigation"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 4b275ca10529cd8c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[MNTimeManager currentTime]"
+                  moduleName = "Navigation"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 7fd024800b4a3c6d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MNDeviceTimeProvider currentTime]"
+                  moduleName = "Navigation"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 36a311f25e76aafd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CSSearchQueryContext currentTime]"
+                  moduleName = "CoreSpotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "61CEB5C2-256B-4D49-8C3E-BA4B33EFA3FB - 11390b33f73be5e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CSSearchQuery currentTime]"
+                  moduleName = "CoreSpotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2937F161-E6CD-4BDF-8594-1EC49B0E5241"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "assignment5/SingleQuiz.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "counter()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C0A51AF-E87A-4727-A5A0-5B0A81298A41"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "assignment5/SingleQuiz.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "counter()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
