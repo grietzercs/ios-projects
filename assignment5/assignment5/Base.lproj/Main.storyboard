@@ -383,15 +383,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Score: 0" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Eme-Jf-r4n">
-                                <rect key="frame" x="87" y="207" width="240" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" red="0.97956319150000004" green="0.94160158120000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Time: 20" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bnp-sW-E2I">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Time: 20" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bnp-sW-E2I">
                                 <rect key="frame" x="87" y="124" width="240" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.97956319150000004" green="0.94160158120000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -408,6 +402,14 @@
                                     <action selector="gameRestart:" destination="Bfx-jd-dzB" eventType="touchUpInside" id="OLP-Nf-F4y"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Score: 0" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kSh-jr-YeO">
+                                <rect key="frame" x="87" y="204" width="240" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.97956319150000004" green="0.94160158120000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lSs-df-lgB"/>
                         <color key="backgroundColor" red="0.21864546942956664" green="0.21864546942956664" blue="0.21864546942956664" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -415,29 +417,21 @@
                             <constraint firstItem="lSs-df-lgB" firstAttribute="bottom" secondItem="vyd-o8-Yon" secondAttribute="bottom" constant="78" id="0fG-sa-4kg"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="trailing" secondItem="0fW-is-1HK" secondAttribute="trailingMargin" id="3QN-sz-wdY"/>
                             <constraint firstItem="c0o-4b-A7S" firstAttribute="leading" secondItem="aU5-JO-6m2" secondAttribute="leading" id="3US-XC-a5o"/>
-                            <constraint firstItem="A3K-rp-Xz3" firstAttribute="top" secondItem="Eme-Jf-r4n" secondAttribute="bottom" constant="33" id="7Q9-mP-mBG"/>
                             <constraint firstItem="A3K-rp-Xz3" firstAttribute="centerX" secondItem="Y9N-Dv-dyE" secondAttribute="centerX" id="JHw-ld-DmD"/>
-                            <constraint firstItem="Eme-Jf-r4n" firstAttribute="top" secondItem="lSs-df-lgB" secondAttribute="top" constant="119" id="LbO-PL-Bup"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="top" secondItem="lSs-df-lgB" secondAttribute="top" constant="258" id="NNM-r8-3XI"/>
                             <constraint firstItem="c0o-4b-A7S" firstAttribute="leading" secondItem="60L-iC-NdF" secondAttribute="trailing" constant="12" id="Nsf-Ah-gms"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="leading" secondItem="60L-iC-NdF" secondAttribute="leading" id="TWQ-P3-2xO"/>
-                            <constraint firstItem="Eme-Jf-r4n" firstAttribute="trailing" secondItem="A3K-rp-Xz3" secondAttribute="trailing" id="XAt-bQ-UAs"/>
-                            <constraint firstItem="Bnp-sW-E2I" firstAttribute="trailing" secondItem="Eme-Jf-r4n" secondAttribute="trailing" id="ZUo-86-5pB"/>
                             <constraint firstItem="lSs-df-lgB" firstAttribute="bottom" secondItem="QmO-iK-kE1" secondAttribute="bottom" constant="233" id="bPh-q1-prz"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="leading" secondItem="0fW-is-1HK" secondAttribute="leadingMargin" id="cH3-Ze-4rD"/>
                             <constraint firstItem="60L-iC-NdF" firstAttribute="trailing" secondItem="QmO-iK-kE1" secondAttribute="trailing" id="ef6-am-p9P"/>
-                            <constraint firstItem="Eme-Jf-r4n" firstAttribute="leading" secondItem="A3K-rp-Xz3" secondAttribute="leading" id="gUw-ge-oJf"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="top" secondItem="A3K-rp-Xz3" secondAttribute="bottom" constant="8" id="hbN-ex-Tiq"/>
                             <constraint firstItem="A3K-rp-Xz3" firstAttribute="leading" secondItem="lSs-df-lgB" secondAttribute="leading" constant="87" id="kMH-W7-TO1"/>
-                            <constraint firstItem="Bnp-sW-E2I" firstAttribute="leading" secondItem="Eme-Jf-r4n" secondAttribute="leading" id="lNh-vE-r3u"/>
                             <constraint firstItem="QmO-iK-kE1" firstAttribute="top" secondItem="60L-iC-NdF" secondAttribute="bottom" constant="21" id="mqS-c2-7UL"/>
                             <constraint firstItem="QmO-iK-kE1" firstAttribute="baseline" secondItem="aU5-JO-6m2" secondAttribute="baseline" id="nDf-dW-Bds"/>
-                            <constraint firstItem="Eme-Jf-r4n" firstAttribute="top" secondItem="Bnp-sW-E2I" secondAttribute="bottom" constant="34" id="nXa-Nz-hm3"/>
                             <constraint firstItem="Y9N-Dv-dyE" firstAttribute="trailing" secondItem="c0o-4b-A7S" secondAttribute="trailing" id="of3-IL-4Qg"/>
                             <constraint firstItem="A3K-rp-Xz3" firstAttribute="top" secondItem="lSs-df-lgB" secondAttribute="top" constant="201" id="onq-rI-km5"/>
                             <constraint firstItem="60L-iC-NdF" firstAttribute="baseline" secondItem="c0o-4b-A7S" secondAttribute="baseline" id="qXQ-xq-fZV"/>
                             <constraint firstItem="60L-iC-NdF" firstAttribute="top" secondItem="Y9N-Dv-dyE" secondAttribute="bottom" constant="29" id="r4m-oD-hqG"/>
-                            <constraint firstItem="Bnp-sW-E2I" firstAttribute="top" secondItem="lSs-df-lgB" secondAttribute="top" constant="36" id="rfL-G1-syb"/>
                             <constraint firstItem="c0o-4b-A7S" firstAttribute="trailing" secondItem="aU5-JO-6m2" secondAttribute="trailing" id="vxU-Wq-gzl"/>
                             <constraint firstItem="60L-iC-NdF" firstAttribute="leading" secondItem="QmO-iK-kE1" secondAttribute="leading" id="yqr-cG-QkA"/>
                             <constraint firstItem="vyd-o8-Yon" firstAttribute="leading" secondItem="lSs-df-lgB" secondAttribute="leading" constant="141" id="z7w-Vq-tUL"/>
@@ -452,7 +446,7 @@
                         <outlet property="optionD" destination="aU5-JO-6m2" id="ukA-c3-17c"/>
                         <outlet property="questionBox" destination="Y9N-Dv-dyE" id="IgM-XU-gQ2"/>
                         <outlet property="restartButton" destination="vyd-o8-Yon" id="qfr-xn-BlF"/>
-                        <outlet property="scoreText" destination="Eme-Jf-r4n" id="DWK-Ka-14E"/>
+                        <outlet property="scoreText" destination="kSh-jr-YeO" id="fBL-GZ-6cT"/>
                         <outlet property="timeTextView" destination="Bnp-sW-E2I" id="VlK-5J-53y"/>
                     </connections>
                 </viewController>

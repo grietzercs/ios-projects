@@ -69,9 +69,7 @@ class SingleQuiz: UIViewController {
         initializeValues()
         coreMotion.deviceMotionUpdateInterval = 1/60
         coreMotion.startDeviceMotionUpdates(using: .xArbitraryZVertical)
-        //defaultButtonColor = optionA.tintColor
-        
-        // Do any additional setup after loading the view.
+
     }
     
     func initializeValues() {
@@ -87,7 +85,7 @@ class SingleQuiz: UIViewController {
         QuestionPlace.text = "Question: 1/4"
     }
     
-    @IBAction func gameRestart(_ sender: Any) {
+    @IBAction func gameRestart() {
         dataFile = "data2"
         initializeValues()
     }
@@ -95,44 +93,56 @@ class SingleQuiz: UIViewController {
     func counter() {
         updatePos()
         if (done) {
-            //restartButton.isHidden = false
             timer.invalidate()
         } else {
             if currentTime == 0 {
                 if (givenAns == correctAns) {
                     print("Correct Answer!")
                     score += 1
-                    scoreText.text = "Score: \(score)"
+                    let text = "Score: \(score)"
+                    scoreText.text = text
                 }
+ 
+                questionNum += 1
                 
-                if ((questionNum+1)==totalQuestions) {
-                    questionNum += 1
+                if (questionNum != totalQuestions) {
                     correctAns = jsonData.questions[questionNum].correctOption
                     questionBox.text = jsonData.questions[questionNum].questionSentence
                     setButtonText()
                     QuestionPlace.text = "Question: \(questionNum+1)/\(totalQuestions)"
                     clearButtons()
                     confirm = false
-                    
-                    currentTime = 20
-                    processedQuestions += 1
+                } else {
+                    finishGame()
                 }
                 
-                if (currentTime == 1) {
-                    done = true
-                }
+                currentTime = 20
+                processedQuestions += 1
                 
-                
+
             } else {
                 currentTime -= 1
                 timeTextView.text = "Time: \(currentTime)"
             }
         }
     }
+    
+    func finishGame() {
+        
+        timer.invalidate()
+        let alertController = UIAlertController(title: "Game Over", message: "Would you like to proceed to the next quiz?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: {(action) -> Void in
+            self.gameRestart()
+        }))
+        alertController.addAction(UIAlertAction(title: "Exit", style: .default, handler: {(action) -> Void in
+            super.didMove(toParent: self.parent)
+        }))
+        self.present(alertController, animated: true, completion: nil)
+    }
 
     func parseJson() {
         
-        let url = Bundle.main.url(forResource: "data", withExtension: "json")
+        let url = Bundle.main.url(forResource: dataFile, withExtension: "json")
         let data = try? Data(contentsOf: url!)
         
         do {
@@ -178,7 +188,6 @@ class SingleQuiz: UIViewController {
     }
     
     func setChoice() {
-        //var givenAns = ""
         switch 1 {
         case optionA.tag:
             givenAns = "A"
@@ -253,7 +262,6 @@ class SingleQuiz: UIViewController {
         }
     }
     
-    //Randomly choose answer when shake
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
         if motion == .motionShake {

@@ -79,9 +79,6 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
         initializeValues()
         coreMotion.deviceMotionUpdateInterval = 1/60
         coreMotion.startDeviceMotionUpdates(using: .xArbitraryZVertical)
-        //defaultButtonColor = optionA.tintColor
-        
-        // Do any additional setup after loading the view.
     }
     
     func initializeValues() {
@@ -102,7 +99,7 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
         self.p4Ans.text = "--"; self.p4Score.text = "0"
     }
     
-    @IBAction func gameRestart(_ sender: Any) {
+    @IBAction func gameRestart() {
         dataFile = "data2"
         initializeValues()
     }
@@ -110,22 +107,17 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
     func counter() {
         updatePos()
         if (done) {
-            //restartButton.isHidden = false
             timer.invalidate()
-//            for i in 0..<session.connectedPeers.count {
-//                if Int(arrayOfUserScores[0].text!)! >= Int(arrayOfUserScores[i+1].text!)! {
-//                    winLabel.text = "YOU WIN!"
-//                    return
-//                }
-//            }
         } else {
             if currentTime == 0 {
                 if (givenAns == correctAns) {
                     print("Correct Answer!")
                     score += 1
-                    scoreText.text = "Score: \(score)"
-                    p1Score.text = String("\(score)")
+                    let text = "Score: \(score)"
+                    scoreText.text = text
                     
+                    p1Score.text = String("\(score)")
+        
                     let currentScore = NSKeyedArchiver.archivedData(withRootObject: score)
                     do {
                         try mcSession.send(currentScore, toPeers: mcSession.connectedPeers, with: .unreliable)
@@ -134,26 +126,38 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
                         print ("Error in sending Score \(outputError)")
                     }
                 }
-                
-                if (currentTime == 1) {
-                    done = true
-                }
-                clearButtons()
-                confirm = false
+ 
                 questionNum += 1
                 
-                correctAns = jsonData.questions[questionNum].correctOption
-                setButtonText()
-                questionBox.text = jsonData.questions[questionNum].questionSentence
-                QuestionPlace.text = "Question: \(questionNum+1)/\(totalQuestions)"
-                
+                if (questionNum != totalQuestions) {
+                    correctAns = jsonData.questions[questionNum].correctOption
+                    questionBox.text = jsonData.questions[questionNum].questionSentence
+                    setButtonText()
+                    QuestionPlace.text = "Question: \(questionNum+1)/\(totalQuestions)"
+                    clearButtons()
+                    confirm = false
+                } else {
+                    finishGame()
+                }
                 currentTime = 20
-                
+            
             } else {
                 currentTime -= 1
                 timeTextView.text = "Time: \(currentTime)"
             }
         }
+    }
+    
+    func finishGame() {
+        timer.invalidate()
+        let alertController = UIAlertController(title: "Game Over", message: "Would you like to proceed to the next quiz?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: {(action) -> Void in
+            self.gameRestart()
+        }))
+        alertController.addAction(UIAlertAction(title: "Exit", style: .default, handler: {(action) -> Void in
+            super.didMove(toParent: self.parent)
+        }))
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func parseJson() {
@@ -357,7 +361,6 @@ class MultiQuiz: UIViewController, MCSessionDelegate, UINavigationControllerDele
         }
     }
     
-    //Randomly choose answer when shake
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
         if motion == .motionShake {

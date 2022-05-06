@@ -14,8 +14,8 @@
             filePath = "assignment5/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "startClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -317,31 +317,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2937F161-E6CD-4BDF-8594-1EC49B0E5241"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "assignment5/SingleQuiz.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "counter()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3C0A51AF-E87A-4727-A5A0-5B0A81298A41"
             shouldBeEnabled = "No"
+            condition = "questionNum == (totalQuestions-1)"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "assignment5/SingleQuiz.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "counter()"
             landmarkType = "7">
          </BreakpointContent>

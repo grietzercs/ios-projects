@@ -12,7 +12,6 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     var mcBrowser: MCBrowserViewController!
     
     var advertiser: MCNearbyServiceAdvertiser!
-    //var newBrowser: MCNearbyService
     
     @IBOutlet weak var modeSelection: UISegmentedControl!
     
@@ -20,7 +19,6 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         self.peerID = MCPeerID(displayName: UIDevice.current.name)
         self.mcSession = MCSession(peer: peerID)
@@ -54,7 +52,6 @@ class ViewController: UIViewController, MCSessionDelegate, MCBrowserViewControll
             invitationHandler(false, nil)
         }))
         present(ac, animated: true)
-        //invitationHandler(true, mcSession)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
