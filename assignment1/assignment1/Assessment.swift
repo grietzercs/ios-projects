@@ -25,6 +25,12 @@ class Assessment {
     var maxPoints: Int!
     var pointWeight: Int!
     
+    init(_ givenPoints: Int, _ max: Int, _ pointWeight: Int) {
+        self.scoredPoints = givenPoints
+        self.maxPoints = max
+        self.pointWeight = pointWeight
+    }
+    
 //    func init(assignmentPoints: Int, assignmentMax: Int, assignmentWeight: Int, midTermPoint: Int, midMax: Int, midWeight: Int, finPoints: Int, finMax: Int, finWeight: Int) {
 //        assignmentsPoints = assignmentPoints
 //        assignmentsMax = assignmentMax
@@ -39,9 +45,10 @@ class Assessment {
 //        finalPointsWeight = finWeight
 //    }
     
-    func initialize(points: Int, max: Int, weight: Int) {
-        scoredPoints = points
-        maxPoints = max
-        pointWeight = weight
+    func getGrade() -> Double {
+        if (self.pointWeight == 0) {
+            return 0
+        }
+        return (Double(self.scoredPoints) / Double(self.maxPoints)) * Double(self.pointWeight)
     }
 }

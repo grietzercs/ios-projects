@@ -19,7 +19,6 @@
 		343950E227C0A34900E499B4 /* assignment1UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343950E127C0A34900E499B4 /* assignment1UITestsLaunchTests.swift */; };
 		349AC19528249A5200648C87 /* Assessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC19428249A5100648C87 /* Assessment.swift */; };
 		349AC19728249A6200648C87 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC19628249A6200648C87 /* Course.swift */; };
-		349AC1992824B0CB00648C87 /* RowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349AC1982824B0CB00648C87 /* RowItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +55,6 @@
 		343950E127C0A34900E499B4 /* assignment1UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignment1UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		349AC19428249A5100648C87 /* Assessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assessment.swift; sourceTree = "<group>"; };
 		349AC19628249A6200648C87 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		349AC1982824B0CB00648C87 /* RowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +115,6 @@
 				343950C427C0A34700E499B4 /* assignment1.xcdatamodeld */,
 				349AC19428249A5100648C87 /* Assessment.swift */,
 				349AC19628249A6200648C87 /* Course.swift */,
-				349AC1982824B0CB00648C87 /* RowItem.swift */,
 			);
 			path = assignment1;
 			sourceTree = "<group>";
@@ -271,7 +268,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				349AC19728249A6200648C87 /* Course.swift in Sources */,
-				349AC1992824B0CB00648C87 /* RowItem.swift in Sources */,
 				343950C027C0A34700E499B4 /* ViewController.swift in Sources */,
 				343950BC27C0A34700E499B4 /* AppDelegate.swift in Sources */,
 				343950C627C0A34700E499B4 /* assignment1.xcdatamodeld in Sources */,

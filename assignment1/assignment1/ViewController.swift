@@ -51,7 +51,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var deleteCourseID: UITextField!
     
     var course: Course!
-    var courses: [Course]!
+    var courses = [Course?]()
+    var grades = [UIImageView?]()
     var assignmentsArray: [Assessment]!
     
     var firstRow: [Any]!
@@ -69,12 +70,11 @@ class ViewController: UIViewController {
         courseGrades = [course1Grade, course2Grade, course3Grade, course4Grade]
         assessmentPoints = [scoredPoints1, scoredPoints2, scoredPoints3]
         assessmentMax = [maxPoints1, maxPoints2, maxPoints3]
-        
-        firstRow = [course1Num, course1Num, course1Grade]
-        secondRow = [course2Num, course2Num, course2Grade]
-        thirdRow = [course3Num, course3Num, course3Grade]
-        fourthRow = [course4Num, course4Num, course4Grade]
-        rowArray = [firstRow, secondRow, thirdRow, fourthRow]
+    
+        grades.append(course1Grade)
+        grades.append(course2Grade)
+        grades.append(course3Grade)
+        grades.append(course4Grade)
         
         for item in courseNumbers {
             item.isHidden = true
@@ -91,96 +91,107 @@ class ViewController: UIViewController {
         deleteCourseButton.isUserInteractionEnabled = false
     }
     
+    func alert(givenTitle: String, givenMessage: String) {
+        let alertController = UIAlertController(title: givenTitle, message: givenMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func addingCourse(_ sender: UIButton) {
-        checkPercentage()
-        checkMaxPoints()
+        
+        for item in courses {
+            if (item?.courseName == courseNameText.text!) {
+                alert(givenTitle: "Input Error", givenMessage: "Course name already exists")
+                return
+            }
+        }
         
         if (courses.count == 4) {
-            let alertController = UIAlertController(title: "USER ERROR", message: "Four courses are the max input, please delete some existing course(s)", preferredStyle: .alert)
-            self.present(alertController, animated: true, completion: nil)
+            alert(givenTitle: "Max Courses Reached", givenMessage: "Four courses are the max input, please delete some existing course(s)")
+            return
         } else {
-            var assignments: Assessment!
-            assignments.initialize(points: Int(scoredPoints1.text!)!, max: Int(maxPoints1.text!)!, weight: Int(scoredPoints1.text!)!)
-            var midTerm: Assessment!
-            midTerm.initialize(points: Int(scoredPoints2.text!)!, max: Int(maxPoints2.text!)!, weight: Int(scoredPoints2.text!)!)
-            var finals: Assessment!
-            finals.initialize(points: Int(scoredPoints3.text!)!, max: Int(maxPoints3.text!)!, weight: Int(scoredPoints3.text!)!)
-            self.assignmentsArray = [assignments!, midTerm!, finals!]
-            course.assessments = assignmentsArray
-            course.creditHours = Int(creditHoursText.text!)!
-            course.courseName = courseNameText.text!
-            pushArray(course: course)
+            let assignments = Assessment(Int(scoredPoints1.text!)!, Int(maxPoints1.text!)!, Int(weight1.text!)!)
+            let midTerm = Assessment(Int(scoredPoints2.text!)!, Int(maxPoints2.text!)!, Int(weight2.text!)!)
+            let finals = Assessment(Int(scoredPoints3.text!)!, Int(maxPoints3.text!)!, Int(weight3.text!)!)
+            let tempCourse = Course(courseNameText.text!, Int(creditHoursText!.text!)!, assignments, midTerm, finals)
+            
+            let sum = assignments.pointWeight + midTerm.pointWeight + finals.pointWeight
+            if (sum != 100) {
+                alert(givenTitle: "Input Error", givenMessage: "Entered percentages do not add to 100")
+                return
+            }
+            let result1 = assignments.maxPoints - assignments.scoredPoints
+            let result2 = midTerm.maxPoints - midTerm.scoredPoints
+            let result3 = finals.maxPoints - finals.scoredPoints
+            let resultArray = [result1, result2, result3]
+            for item in resultArray {
+                if (item < 0) {
+                    alert(givenTitle: "Input Error", givenMessage: "One of the entered Max points is less than a Point value")
+                    return
+                }
+            }
+            
+            courses.append(tempCourse)
+            populateChalkboard()
+            if (courses.count > 0) {
+                deleteCourseButton.isUserInteractionEnabled = true
+                deleteCourseButton.isHidden = false
+            }
         }
     }
     
     @IBAction func deleteCourse(_ sender: UIButton) {
-        var courseID = Int(deleteCourseID.text!)!
-        courseID -= 1
-        if (courseID > 0 && courseID < 4) {
-            popArray(courseID: Int(deleteCourseID.text!)!)
+        var index = Int(deleteCourseID!.text!)
+        index! -= 1
+        if (courses.count > index! && index!>=0) {
+            courses.remove(at: index!)
+        }
+        if (courses.count > 0) {
+            deleteCourseButton.isHidden = false
         } else {
-            let alertController = UIAlertController(title: "USER ERROR", message: "Please enter course ID between 1 and 4", preferredStyle: .alert)
-            self.present(alertController, animated: true, completion: nil)
+            deleteCourseButton.isHidden = true
+        }
+        populateChalkboard()
+    }
+    
+    func populateChalkboard() {
+        for i in 0...3 {
+            if (courses.count > i) {
+                courseNumbers[i].isHidden = false
+                let testOutput = courses[i]!.courseName!
+                print("Test output: \(testOutput)")
+                courseNames[i].text = "\(courses[i]!.courseName!)"
+                courseNames[i].isHidden = false
+                courseGrades[i].image = courses[i]?.getLetterGrade()
+                courseGrades[i].isHidden = false
+            } else {
+                courseNumbers[i].isHidden = true
+                courseNames[i].isHidden = true
+                courseGrades[i].isHidden = true
+            }
         }
     }
     
-    func popArray(courseID: Int) {
-        switch courseID {
-        case 0:
-            courses[0] = courses[1]
-            courses[1] = courses[2]
-            courses[2] = courses[3]
-            courses.popLast()
-        case 1:
-            courses[1] = courses[2]
-            courses[2] = courses[3]
-            courses.popLast()
-        case 2:
-            courses[2] = courses[3]
-            courses.popLast()
-        case 3:
-            //let tempCourse = Course
-            courses.popLast()
+    func updateGPA() -> Double {
+        var totalPoints = 0
+        var totalCredits = 0
+        if (courses.count > 0) {
+            for item in courses {
+                totalPoints += (item?.getGradeScale())!
+                totalCredits += (item?.creditHours)!
+            }
+        }
+        let tempGPA = Double(totalPoints) / Double(totalCredits)
+        switch true {
+        case tempGPA > 3.0:
+            totalGPA.textColor = .green
+        case tempGPA > 2.0:
+            totalGPA.textColor = .orange
         default:
-            print("default switch case reached")
+            totalGPA.textColor = .red
         }
         
-    }
-    
-    func pushArray(course: Course) {
-        courses.append(course)
-    }
-    
-//    func updateBoard() {
-//        for i in 0...courses.count {
-//            for item in rowArray[i] {
-//                item.isHidden
-//            }
-//        }
-//    }
-    
-    func
-    
-    func checkPercentage() {
-        let totalPercentage = Int(weight1.text!)! + Int(weight2.text!)! + Int(weight3.text!)!
-        if (totalPercentage != 100) {
-            let alertController = UIAlertController(title: "USER ERROR", message: "Percentages do not sum to 100", preferredStyle: .alert)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func checkMaxPoints() {
-        let alertController = UIAlertController(title: "USER ERROR", message: "Input scored points for assessment exceed inputted max points", preferredStyle: .alert)
-        
-        if (assessmentPoints[0].text! > assessmentMax[0].text! || Int(assessmentPoints[0].text!)! < 0) {
-            self.present(alertController, animated: true, completion: nil)
-        }
-        if (assessmentPoints[1].text! > assessmentMax[1].text! || Int(assessmentPoints[1].text!)! < 0) {
-            self.present(alertController, animated: true, completion: nil)
-        }
-        if (assessmentPoints[2].text! > assessmentMax[2].text! || Int(assessmentPoints[2].text!)! < 0) {
-            self.present(alertController, animated: true, completion: nil)
-        }
+        return tempGPA
     }
 
 }
